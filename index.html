@@ -1,1206 +1,1399 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>FHJ | Visual Effects Studio</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta name="description"
+content="FHJ Visual Effects Studio - NUKE影视合成、场景修复、抠像、ROTO、VFX视觉特效">
 
-    <title>FHJ | Visual Effects Studio</title>
+<style>
 
-    <meta
-        name="description"
-        content="FHJ Visual Effects Studio - Nuke影视合成、VFX、抠像、Cleanup、场景修复与影视后期制作。">
+/* =========================================================
+   全局变量
+========================================================= */
 
-    <style>
+:root {
+    --bg:#ffffff;
+    --bg-soft:#f6f6f3;
+    --card-bg:#eeeeeb;
 
-        /* =========================
-           RESET
-        ========================= */
+    --text:#111111;
+    --text-secondary:#666666;
+    --text-light:#999999;
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    --border:#e5e5e5;
+    --border-dark:#d7d7d7;
 
-        html {
-            scroll-behavior: smooth;
-        }
+    --button-bg:#111111;
+    --button-text:#ffffff;
 
-        body {
+    --nav-bg:rgba(255,255,255,.90);
+}
 
-            font-family:
-                Arial,
-                "Microsoft YaHei",
-                "PingFang SC",
-                sans-serif;
+body.dark {
+    --bg:#111111;
+    --bg-soft:#181818;
+    --card-bg:#222222;
 
-            background: #f5f5f2;
+    --text:#f5f5f5;
+    --text-secondary:#aaaaaa;
+    --text-light:#777777;
 
-            color: #111;
+    --border:#2d2d2d;
+    --border-dark:#3b3b3b;
 
-            overflow-x: hidden;
-        }
+    --button-bg:#f5f5f5;
+    --button-text:#111111;
 
-        a {
+    --nav-bg:rgba(17,17,17,.90);
+}
 
-            color: inherit;
 
-            text-decoration: none;
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
-        button {
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-            font-family: inherit;
-        }
+html {
+    scroll-behavior:smooth;
+}
 
+body {
+    background:var(--bg);
+    color:var(--text);
 
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Microsoft YaHei",
+        Arial,
+        sans-serif;
 
-        /* =========================
-           NAVIGATION
-        ========================= */
+    overflow-x:hidden;
 
-        .nav {
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
 
-            position: fixed;
+a {
+    color:inherit;
+    text-decoration:none;
+}
 
-            top: 0;
-            left: 0;
+button {
+    font-family:inherit;
+}
 
-            width: 100%;
-            height: 76px;
 
-            padding: 0 6vw;
+/* =========================================================
+   顶部导航
+========================================================= */
 
-            display: flex;
+.nav {
+    position:fixed;
 
-            align-items: center;
+    top:0;
+    left:0;
 
-            justify-content: space-between;
+    width:100%;
+    height:78px;
 
-            z-index: 999;
+    display:flex;
+    align-items:center;
 
-            background:
-                rgba(245,245,242,.75);
+    padding:0 48px;
 
-            backdrop-filter:
-                blur(20px);
+    background:var(--nav-bg);
 
-            -webkit-backdrop-filter:
-                blur(20px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
-            border-bottom:
-                1px solid rgba(0,0,0,.06);
-        }
+    border-bottom:1px solid var(--border);
 
+    z-index:1000;
+}
 
-        .logo {
 
-            font-size: 28px;
+/* Logo */
 
-            font-weight: 800;
+.logo {
+    font-size:25px;
 
-            letter-spacing: -2px;
-        }
+    font-weight:900;
 
+    letter-spacing:-.04em;
 
-        .logo span {
+    line-height:1;
 
-            opacity: .35;
-        }
+    flex-shrink:0;
+}
 
 
-        .nav-links {
+/* =========================================================
+   右侧导航
+========================================================= */
 
-            display: flex;
+.nav-links {
+    display:flex;
 
-            gap: 35px;
-        }
+    align-items:center;
 
+    gap:42px;
 
-        .nav-links a {
+    /* 关键：整体推到最右侧 */
 
-            font-size: 11px;
+    margin-left:auto;
+}
 
-            font-weight: 700;
 
-            letter-spacing: 1.5px;
+/* 中文菜单 */
 
-            opacity: .55;
+.nav-links a {
+    position:relative;
 
-            transition: .25s;
-        }
+    font-size:15px;
 
+    font-weight:700;
 
-        .nav-links a:hover {
+    letter-spacing:.08em;
 
-            opacity: 1;
-        }
+    color:var(--text);
 
+    padding:8px 0;
 
+    white-space:nowrap;
 
-        /* =========================
-           HERO
-        ========================= */
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
 
-        .hero {
 
-            min-height: 100vh;
+.nav-links a:hover {
+    opacity:.55;
 
-            padding:
-                140px 8vw
-                80px;
+    transform:translateY(-1px);
+}
 
-            position: relative;
 
-            display: flex;
+/* 菜单底部线 */
 
-            align-items: center;
+.nav-links a::after {
+    content:"";
 
-            overflow: hidden;
-        }
+    position:absolute;
 
+    left:0;
+    bottom:0;
 
-        .hero-bg {
+    width:0;
+    height:1px;
 
-            position: absolute;
+    background:var(--text);
 
-            inset: 0;
+    transition:
+        width .3s ease;
+}
 
-            z-index: -2;
 
-            background:
+.nav-links a:hover::after {
+    width:100%;
+}
 
-                radial-gradient(
-                    circle at 75% 30%,
-                    rgba(255,255,255,.95),
-                    transparent 30%
-                ),
 
-                linear-gradient(
-                    120deg,
-                    #eeeeea,
-                    #fafaf8,
-                    #e8e8e3
-                );
-        }
+/* =========================================================
+   明暗切换
+========================================================= */
 
+.theme-toggle {
+    margin-left:32px;
 
-        .hero-circle {
+    width:38px;
+    height:38px;
 
-            position: absolute;
+    border:1px solid var(--border-dark);
 
-            width: 60vw;
+    background:transparent;
 
-            height: 60vw;
+    color:var(--text);
 
-            right: -25vw;
+    display:flex;
 
-            top: 10vh;
+    align-items:center;
+    justify-content:center;
 
-            border:
-                1px solid
-                rgba(0,0,0,.08);
+    cursor:pointer;
 
-            border-radius: 50%;
+    font-size:16px;
 
-            z-index: -1;
-        }
+    flex-shrink:0;
 
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border .25s ease;
+}
 
-        .hero-content {
 
-            max-width: 1100px;
-        }
+.theme-toggle:hover {
+    background:var(--button-bg);
 
+    color:var(--button-text);
 
-        .eyebrow {
+    border-color:var(--button-bg);
+}
 
-            font-size: 10px;
 
-            letter-spacing: 3px;
+/* =========================================================
+   HERO
+========================================================= */
 
-            font-weight: 700;
+.hero {
+    min-height:100vh;
 
-            opacity: .45;
+    padding:
+        170px 48px 80px;
 
-            margin-bottom: 22px;
-        }
+    display:flex;
 
+    flex-direction:column;
 
-        .hero h1 {
+    justify-content:center;
+}
 
-            font-size:
-                clamp(
-                    70px,
-                    12vw,
-                    170px
-                );
 
-            line-height: .82;
+.hero-label {
+    font-size:12px;
 
-            letter-spacing: -.08em;
+    font-weight:700;
 
-            font-weight: 800;
-        }
+    letter-spacing:.18em;
 
+    color:var(--text-secondary);
 
-        .hero h1 span {
+    margin-bottom:30px;
+}
 
-            font-weight: 400;
-        }
 
+.hero-title {
+    font-size:clamp(72px,11vw,190px);
 
-        .hero-description {
+    line-height:.82;
 
-            margin-top: 42px;
+    font-weight:900;
 
-            font-size: 15px;
+    letter-spacing:-.065em;
 
-            line-height: 1.8;
+    text-transform:uppercase;
+}
 
-            color: #666;
 
-            max-width: 500px;
-        }
+.hero-title-outline {
+    color:transparent;
 
+    -webkit-text-stroke:
+        1.5px var(--text);
 
-        .hero-button {
+    margin-left:7vw;
+}
 
-            display: inline-flex;
 
-            margin-top: 32px;
+.hero-description {
+    max-width:600px;
 
-            padding:
-                15px 22px;
+    margin-top:52px;
 
-            border:
-                1px solid #111;
+    font-size:15px;
 
-            border-radius: 100px;
+    line-height:2;
 
-            font-size: 11px;
+    color:var(--text-secondary);
+}
 
-            font-weight: 700;
 
-            transition: .3s;
-        }
+/* =========================================================
+   查看作品按钮
+========================================================= */
 
+.view-work-btn {
+    margin-top:55px;
 
-        .hero-button:hover {
+    width:fit-content;
 
-            background: #111;
+    display:inline-flex;
 
-            color: white;
-        }
+    align-items:center;
 
+    gap:28px;
 
-        .scroll-text {
+    padding:14px 20px;
 
-            position: absolute;
+    border:1px solid var(--text);
 
-            bottom: 30px;
+    color:var(--text);
 
-            left: 8vw;
+    font-size:11px;
 
-            font-size: 9px;
+    font-weight:700;
 
-            letter-spacing: 2px;
+    letter-spacing:.12em;
 
-            opacity: .4;
-        }
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+}
 
 
+.view-work-btn:hover {
+    background:var(--button-bg);
 
-        /* =========================
-           SECTION
-        ========================= */
+    color:var(--button-text);
 
-        .section {
+    transform:translateY(-3px);
+}
 
-            padding:
-                130px 8vw;
-        }
 
+.view-work-arrow {
+    font-size:15px;
 
-        .section-header {
+    line-height:1;
 
-            display: flex;
+    transition:
+        transform .3s ease;
+}
 
-            justify-content:
-                space-between;
 
-            align-items:
-                flex-end;
+.view-work-btn:hover .view-work-arrow {
+    transform:translateY(3px);
+}
 
-            margin-bottom: 50px;
-        }
 
+/* =========================================================
+   通用 SECTION
+========================================================= */
 
-        .section-title {
+.section {
+    padding:
+        120px 48px;
+}
 
-            font-size:
-                clamp(
-                    45px,
-                    6vw,
-                    80px
-                );
 
-            letter-spacing:
-                -.07em;
-        }
+.section-header {
+    display:flex;
 
+    justify-content:space-between;
 
-        .section-description {
+    align-items:flex-end;
 
-            max-width: 320px;
+    margin-bottom:55px;
 
-            font-size: 12px;
+    gap:40px;
+}
 
-            line-height: 1.8;
 
-            color: #777;
-        }
+.section-number {
+    font-size:11px;
 
+    font-weight:700;
 
+    letter-spacing:.15em;
 
-        /* =========================
-           FILTER
-        ========================= */
+    color:var(--text-light);
 
-        .filters {
+    margin-bottom:14px;
+}
 
-            display: flex;
 
-            gap: 10px;
+.section-title {
+    font-size:clamp(48px,6vw,86px);
 
-            flex-wrap: wrap;
+    line-height:.9;
 
-            margin-bottom: 35px;
-        }
+    font-weight:900;
 
+    letter-spacing:-.05em;
+}
 
-        .filter {
 
-            border:
-                1px solid #d5d5d1;
+.section-description {
+    max-width:430px;
 
-            background:
-                transparent;
+    font-size:14px;
 
-            border-radius:
-                100px;
+    line-height:1.9;
 
-            padding:
-                10px 17px;
+    color:var(--text-secondary);
+}
 
-            font-size: 10px;
 
-            cursor: pointer;
+/* =========================================================
+   筛选
+========================================================= */
 
-            transition: .25s;
-        }
+.filters {
+    display:flex;
 
+    flex-wrap:wrap;
 
-        .filter:hover,
-        .filter.active {
+    gap:10px;
 
-            background: #111;
+    margin-bottom:35px;
+}
 
-            color: white;
 
-            border-color: #111;
-        }
+.filter-btn {
+    border:1px solid var(--border-dark);
 
+    background:transparent;
 
+    color:var(--text-secondary);
 
-        /* =========================
-           PROJECT GRID
-        ========================= */
+    padding:9px 15px;
 
-        .projects {
+    font-size:11px;
 
-            display: grid;
+    font-weight:700;
 
-            grid-template-columns:
-                repeat(2, 1fr);
+    cursor:pointer;
 
-            gap:
-                45px 25px;
-        }
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border .25s ease;
+}
 
 
-        .project {
+.filter-btn:hover,
+.filter-btn.active {
+    background:var(--button-bg);
 
-            cursor: pointer;
+    color:var(--button-text);
 
-            min-width: 0;
-        }
+    border-color:var(--button-bg);
+}
 
 
+/* =========================================================
+   作品网格
+   电脑大屏：每行6个
+========================================================= */
 
-        /* =========================
-           PROJECT IMAGE
-           
-           核心修改：
-           不再使用 cover
-        ========================= */
+.projects {
+    display:grid;
 
-        .project-image {
+    grid-template-columns:
+        repeat(6,minmax(0,1fr));
 
-            position: relative;
+    column-gap:16px;
 
-            width: 100%;
+    row-gap:42px;
+}
 
-            aspect-ratio: 16 / 10;
 
-            overflow: hidden;
+/* =========================================================
+   作品卡片
+========================================================= */
 
-            background:
-                #e9e9e5;
+.project {
+    cursor:pointer;
 
-            display: flex;
+    min-width:0;
 
-            align-items: center;
+    transition:
+        transform .35s ease;
+}
 
-            justify-content: center;
-        }
 
+.project:hover {
+    transform:translateY(-5px);
+}
 
-        .project-image img {
 
-            width: 100%;
+/* 统一竖版4:5 */
 
-            height: 100%;
+.project-image {
+    position:relative;
 
-            /*
-             * 核心：
-             * 完整显示图片
-             * 不裁切
-             * 不变形
-             */
-            object-fit: contain;
+    width:100%;
 
-            object-position: center;
+    aspect-ratio:4 / 5;
 
-            display: block;
+    overflow:hidden;
 
-            transition:
-                transform .6s ease,
-                filter .6s ease;
+    background:var(--card-bg);
 
-            /*
-             * 防止图片不存在时出现默认破图
-             */
-            font-size: 0;
-        }
+    display:flex;
 
+    align-items:center;
 
-        /*
-         * 横版图片
-         */
+    justify-content:center;
+}
 
-        .project-image.landscape img {
 
-            object-fit: cover;
-        }
+.project-image img {
+    width:100%;
+    height:100%;
 
+    display:block;
 
-        /*
-         * 竖版图片
-         *
-         * 完整显示，不裁切
-         */
+    object-fit:cover;
 
-        .project-image.portrait img {
+    object-position:center;
 
-            object-fit: contain;
+    transition:
+        transform .6s cubic-bezier(.2,.7,.2,1),
+        opacity .3s ease;
+}
 
-            background:
-                #e9e9e5;
-        }
 
+.project:hover .project-image img {
+    transform:scale(1.045);
+}
 
-        /*
-         * 竖版图片不进行放大
-         */
 
-        .project:hover
-        .project-image.portrait img {
+/* 图片加载失败 */
 
-            transform: none;
+.project-image.image-error::after {
+    content:"暂无预览";
 
-            filter:
-                brightness(.82);
-        }
+    position:absolute;
 
+    inset:0;
 
-        /*
-         * 横版图片正常轻微放大
-         */
+    display:flex;
 
-        .project:hover
-        .project-image.landscape img {
+    align-items:center;
 
-            transform:
-                scale(1.035);
+    justify-content:center;
 
-            filter:
-                brightness(.82);
-        }
+    font-size:11px;
 
+    letter-spacing:.15em;
 
+    color:var(--text-light);
+}
 
-        /* =========================
-           PROJECT OVERLAY
-        ========================= */
 
-        .project-overlay {
+/* =========================================================
+   播放按钮
+========================================================= */
 
-            position: absolute;
+.project-play {
+    position:absolute;
 
-            inset: 0;
+    right:14px;
+    bottom:14px;
 
-            display: flex;
+    width:36px;
+    height:36px;
 
-            align-items: center;
+    border-radius:50%;
 
-            justify-content: center;
+    background:rgba(255,255,255,.92);
 
-            opacity: 0;
+    color:#111;
 
-            background:
-                rgba(0,0,0,.25);
+    display:flex;
 
-            transition: .3s;
+    align-items:center;
+    justify-content:center;
 
-            color: white;
+    font-size:11px;
 
-            font-size: 11px;
+    opacity:0;
 
-            letter-spacing: 2px;
+    transform:translateY(8px);
 
-            pointer-events: none;
-        }
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
 
 
-        .project:hover
-        .project-overlay {
+.project:hover .project-play {
+    opacity:1;
 
-            opacity: 1;
-        }
+    transform:translateY(0);
+}
 
 
+/* =========================================================
+   作品信息
+========================================================= */
 
-        /* =========================
-           PROJECT INFO
-        ========================= */
+.project-info {
+    padding-top:17px;
+}
 
-        .project-info {
 
-            padding-top: 17px;
-        }
+.project-number {
+    font-size:10px;
 
+    font-weight:700;
 
-        .project-category {
+    color:var(--text-light);
 
-            font-size: 9px;
+    letter-spacing:.12em;
 
-            letter-spacing: 2px;
+    margin-bottom:8px;
+}
 
-            color: #888;
-        }
 
+.project-title {
+    font-size:14px;
 
-        .project-title {
+    font-weight:800;
 
-            margin-top: 7px;
+    line-height:1.5;
 
-            font-size: 21px;
+    margin-bottom:5px;
+}
 
-            letter-spacing: -.04em;
-        }
 
+.project-category {
+    font-size:10px;
 
-        .project-desc {
+    color:var(--text-light);
 
-            margin-top: 5px;
+    letter-spacing:.08em;
+}
 
-            font-size: 11px;
 
-            color: #888;
-        }
+/* =========================================================
+   SERVICES
+========================================================= */
 
+.services {
+    border-top:1px solid var(--border);
+}
 
 
-        /* =========================
-           IMAGE ERROR
-        ========================= */
+.service-item {
+    display:grid;
 
-        .image-error {
+    grid-template-columns:
+        70px 1fr auto;
 
-            width: 100%;
+    align-items:center;
 
-            height: 100%;
+    gap:30px;
 
-            display: flex;
+    padding:28px 0;
 
-            align-items: center;
+    border-bottom:1px solid var(--border);
 
-            justify-content: center;
+    transition:
+        padding .3s ease;
+}
 
-            flex-direction: column;
 
-            gap: 8px;
+.service-item:hover {
+    padding-left:10px;
 
-            color: #999;
+    padding-right:10px;
+}
 
-            background:
-                #e9e9e5;
 
-            font-size: 11px;
+.service-number {
+    font-size:11px;
 
-            letter-spacing: 1px;
-        }
+    color:var(--text-light);
 
+    font-weight:700;
+}
 
-        .image-error span:first-child {
 
-            font-size: 24px;
+.service-name {
+    font-size:clamp(24px,3vw,42px);
 
-            opacity: .4;
-        }
+    font-weight:800;
 
+    letter-spacing:-.04em;
+}
 
 
-        /* =========================
-           SERVICES
-        ========================= */
+.service-description {
+    font-size:12px;
 
-        .services {
+    color:var(--text-secondary);
 
-            background: #111;
+    text-align:right;
+}
 
-            color: #f5f5f2;
-        }
 
+/* =========================================================
+   ABOUT
+========================================================= */
 
-        .services .eyebrow {
+.about-grid {
+    display:grid;
 
-            color: #fff;
+    grid-template-columns:
+        1fr 1fr;
 
-            opacity: .35;
-        }
+    gap:100px;
+}
 
 
-        .service-list {
+.about-large {
+    font-size:clamp(30px,4vw,58px);
 
-            border-top:
-                1px solid
-                rgba(255,255,255,.15);
-        }
+    line-height:1.1;
 
+    font-weight:800;
 
-        .service-item {
+    letter-spacing:-.04em;
+}
 
-            display: grid;
 
-            grid-template-columns:
-                70px 1fr 1fr;
+.about-text {
+    font-size:14px;
 
-            gap: 20px;
+    line-height:2;
 
-            padding: 35px 0;
+    color:var(--text-secondary);
 
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.15);
-        }
+    max-width:600px;
+}
 
 
-        .service-number {
+.about-text p + p {
+    margin-top:25px;
+}
 
-            font-size: 10px;
 
-            opacity: .35;
-        }
+/* =========================================================
+   CONTACT
+========================================================= */
 
+.contact {
+    background:var(--bg-soft);
+}
 
-        .service-title {
 
-            font-size: 22px;
+.contact-content {
+    display:grid;
 
-            letter-spacing: -.04em;
-        }
+    grid-template-columns:
+        1fr 1fr;
 
+    gap:80px;
+}
 
-        .service-description {
 
-            font-size: 12px;
+.contact-title {
+    font-size:clamp(55px,8vw,120px);
 
-            line-height: 1.8;
+    line-height:.85;
 
-            opacity: .45;
-        }
+    font-weight:900;
 
+    letter-spacing:-.07em;
+}
 
 
-        /* =========================
-           ABOUT
-        ========================= */
+.contact-info {
+    display:flex;
 
-        .about {
+    flex-direction:column;
 
-            display: grid;
+    justify-content:flex-end;
+}
 
-            grid-template-columns:
-                1.2fr .8fr;
 
-            gap: 10vw;
-        }
+.contact-label {
+    font-size:10px;
 
+    color:var(--text-light);
 
-        .about-title {
+    letter-spacing:.12em;
 
-            font-size:
-                clamp(
-                    42px,
-                    6vw,
-                    78px
-                );
+    margin-bottom:8px;
+}
 
-            line-height: .95;
 
-            letter-spacing: -.07em;
-        }
+.contact-value {
+    font-size:18px;
 
+    font-weight:700;
 
-        .about-text {
+    margin-bottom:28px;
+}
 
-            padding-top: 45px;
 
-            font-size: 14px;
+.contact-services {
+    font-size:12px;
 
-            line-height: 2;
+    color:var(--text-secondary);
 
-            color: #777;
-        }
+    line-height:1.9;
+}
 
 
+/* =========================================================
+   FOOTER
+========================================================= */
 
-        /* =========================
-           CONTACT
-        ========================= */
+footer {
+    padding:
+        30px 48px;
 
-        .contact {
+    display:flex;
 
-            padding:
-                150px 8vw;
+    justify-content:space-between;
 
-            background: #e6e6e1;
-        }
+    align-items:center;
 
+    gap:20px;
 
-        .contact-title {
+    border-top:1px solid var(--border);
 
-            font-size:
-                clamp(
-                    65px,
-                    10vw,
-                    150px
-                );
+    font-size:10px;
 
-            line-height: .85;
+    color:var(--text-light);
 
-            letter-spacing: -.08em;
+    letter-spacing:.08em;
+}
 
-            margin-bottom: 90px;
-        }
 
+/* =========================================================
+   视频弹窗
+========================================================= */
 
-        .contact-title span {
+.video-modal {
+    position:fixed;
 
-            font-weight: 400;
-        }
+    inset:0;
 
+    background:rgba(0,0,0,.88);
 
-        .contact-info {
+    display:none;
 
-            display: flex;
+    align-items:center;
 
-            justify-content:
-                space-between;
+    justify-content:center;
 
-            border-top:
-                1px solid #bbb;
+    padding:40px;
 
-            padding-top: 20px;
+    z-index:3000;
+}
 
-            font-size: 12px;
-        }
 
+.video-modal.active {
+    display:flex;
+}
 
 
-        /* =========================
-           MODAL
-        ========================= */
+.video-container {
+    position:relative;
 
-        .modal {
+    width:min(1200px,95vw);
 
-            position: fixed;
+    max-height:90vh;
+}
 
-            inset: 0;
 
-            z-index: 2000;
+.video-container video {
+    display:block;
 
-            background:
-                rgba(0,0,0,.88);
+    width:100%;
 
-            display: none;
+    max-height:85vh;
 
-            align-items: center;
+    background:#000;
+}
 
-            justify-content: center;
 
-            padding: 30px;
-        }
+.video-close {
+    position:absolute;
 
+    right:-5px;
 
-        .modal.active {
+    top:-48px;
 
-            display: flex;
-        }
+    width:36px;
+    height:36px;
 
+    border:1px solid rgba(255,255,255,.5);
 
-        .modal-content {
+    background:transparent;
 
-            width:
-                min(
-                    1100px,
-                    95vw
-                );
-        }
+    color:#fff;
 
+    font-size:20px;
 
-        .modal video {
+    cursor:pointer;
 
-            width: 100%;
+    display:flex;
 
-            max-height: 75vh;
+    align-items:center;
+    justify-content:center;
+}
 
-            background: black;
-        }
 
+/* =========================================================
+   手机菜单
+========================================================= */
 
-        .modal-title {
+.mobile-menu {
+    display:none;
 
-            color: white;
+    margin-left:18px;
 
-            margin-top: 18px;
+    width:38px;
+    height:38px;
 
-            font-size: 20px;
-        }
+    border:1px solid var(--border-dark);
 
+    background:transparent;
 
-        .modal-close {
+    color:var(--text);
 
-            position: fixed;
+    cursor:pointer;
 
-            top: 20px;
+    font-size:18px;
+}
 
-            right: 30px;
 
-            background: none;
+/* =========================================================
+   1600以下
+========================================================= */
 
-            border: none;
+@media (max-width:1600px) {
 
-            color: white;
+    .projects {
+        grid-template-columns:
+            repeat(5,minmax(0,1fr));
+    }
 
-            font-size: 40px;
+}
 
-            cursor: pointer;
-        }
 
+/* =========================================================
+   1300以下
+========================================================= */
 
+@media (max-width:1300px) {
 
-        /* =========================
-           FOOTER
-        ========================= */
+    .nav {
+        padding:0 35px;
+    }
 
-        footer {
+    .nav-links {
+        gap:36px;
+    }
 
-            padding:
-                30px 6vw;
+    .theme-toggle {
+        margin-left:30px;
+    }
 
-            display: flex;
+    .hero,
+    .section {
+        padding-left:35px;
+        padding-right:35px;
+    }
 
-            justify-content:
-                space-between;
+    .projects {
+        grid-template-columns:
+            repeat(4,minmax(0,1fr));
+    }
 
-            font-size: 9px;
+}
 
-            letter-spacing: 1.5px;
 
-            color: #777;
-        }
+/* =========================================================
+   1000以下
+========================================================= */
 
+@media (max-width:1000px) {
 
+    .nav {
+        padding:0 25px;
+    }
 
-        /* =========================
-           MOBILE
-        ========================= */
+    .nav-links {
+        gap:25px;
+    }
 
-        @media(max-width: 768px) {
+    .nav-links a {
+        font-size:14px;
+    }
 
+    .theme-toggle {
+        margin-left:22px;
+    }
 
-            .nav {
+    .hero,
+    .section {
+        padding-left:25px;
+        padding-right:25px;
+    }
 
-                height: 65px;
+    .projects {
+        grid-template-columns:
+            repeat(3,minmax(0,1fr));
 
-                padding:
-                    0 7vw;
-            }
+        column-gap:14px;
+    }
 
+    .about-grid,
+    .contact-content {
+        gap:50px;
+    }
 
-            .nav-links {
+}
 
-                display: none;
-            }
 
+/* =========================================================
+   平板 / 手机
+========================================================= */
 
-            .hero {
+@media (max-width:768px) {
 
-                padding:
-                    120px 7vw
-                    80px;
-            }
+    .nav {
+        height:68px;
 
+        padding:
+            0 20px;
+    }
 
-            .hero h1 {
+    .logo {
+        font-size:23px;
+    }
 
-                font-size:
-                    22vw;
-            }
 
+    .nav-links {
 
-            .section {
+        display:none;
 
-                padding:
-                    90px 7vw;
-            }
+        position:absolute;
 
+        top:68px;
 
-            .section-header {
+        left:0;
 
-                display: block;
-            }
+        width:100%;
 
+        padding:20px;
 
-            .section-description {
+        background:var(--nav-bg);
 
-                margin-top: 20px;
-            }
+        backdrop-filter:blur(18px);
 
+        -webkit-backdrop-filter:blur(18px);
 
-            .projects {
+        border-bottom:1px solid var(--border);
 
-                grid-template-columns:
-                    1fr;
+        flex-direction:column;
 
-                gap: 40px;
-            }
+        align-items:flex-start;
 
+        gap:18px;
 
-            .project-image {
+        margin-left:0;
+    }
 
-                aspect-ratio:
-                    16 / 10;
-            }
 
+    .nav-links.open {
+        display:flex;
+    }
 
-            .service-item {
 
-                grid-template-columns:
-                    40px 1fr;
-            }
+    .nav-links a {
+        font-size:16px;
 
+        width:100%;
 
-            .service-description {
+        padding:8px 0;
+    }
 
-                grid-column: 2;
-            }
 
+    .theme-toggle {
+        margin-left:auto;
+    }
 
-            .about {
 
-                grid-template-columns:
-                    1fr;
-            }
+    .mobile-menu {
+        display:flex;
 
+        align-items:center;
 
-            .about-text {
+        justify-content:center;
+    }
 
-                padding-top: 0;
-            }
 
+    .hero {
+        min-height:90vh;
 
-            .contact {
+        padding:
+            140px 20px 70px;
+    }
 
-                padding:
-                    100px 7vw;
-            }
 
+    .hero-title {
+        font-size:
+            clamp(58px,16vw,110px);
+    }
 
-            .contact-info {
 
-                display: block;
+    .hero-description {
+        font-size:14px;
 
-                line-height: 2.5;
-            }
+        margin-top:35px;
+    }
 
 
-            footer {
+    .section {
+        padding:
+            85px 20px;
+    }
 
-                display: block;
 
-                line-height: 2;
-            }
+    .section-header {
+        display:block;
 
-        }
+        margin-bottom:40px;
+    }
 
-    </style>
 
+    .section-description {
+        margin-top:25px;
+    }
+
+
+    .projects {
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        column-gap:12px;
+
+        row-gap:35px;
+    }
+
+
+    .project-title {
+        font-size:13px;
+    }
+
+
+    .project-play {
+        opacity:1;
+
+        transform:none;
+
+        width:32px;
+
+        height:32px;
+    }
+
+
+    .about-grid,
+    .contact-content {
+        grid-template-columns:1fr;
+
+        gap:45px;
+    }
+
+
+    .service-item {
+        grid-template-columns:
+            45px 1fr;
+    }
+
+
+    .service-description {
+        grid-column:2;
+
+        text-align:left;
+
+        margin-top:-15px;
+    }
+
+
+    footer {
+        padding:
+            25px 20px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   小手机
+========================================================= */
+
+@media (max-width:480px) {
+
+    .projects {
+        grid-template-columns:1fr;
+    }
+
+
+    .project-image {
+        aspect-ratio:4 / 5;
+    }
+
+
+    .hero-title {
+        font-size:58px;
+    }
+
+
+    .section-title {
+        font-size:50px;
+    }
+
+
+    .view-work-btn {
+        margin-top:40px;
+    }
+
+}
+
+</style>
 </head>
 
 
 <body>
 
 
-<!-- =========================
-     NAV
-========================= -->
+<!-- =========================================================
+     顶部导航
+========================================================= -->
 
-<header class="nav">
+<nav class="nav">
 
-    <a href="#home" class="logo">
-        FHJ<span>.</span>
+    <a href="#top" class="logo">
+        FHJ.
     </a>
 
 
-    <nav class="nav-links">
+    <div class="nav-links" id="navLinks">
 
         <a href="#work">
-            WORK
+            作品
         </a>
 
         <a href="#services">
-            SERVICES
+            服务
         </a>
 
         <a href="#about">
-            ABOUT
+            关于
         </a>
 
         <a href="#contact">
-            CONTACT
+            联系
         </a>
 
-    </nav>
+    </div>
+
+
+    <button
+        class="theme-toggle"
+        id="themeToggle"
+        aria-label="切换主题">
+        ◐
+    </button>
+
+
+    <button
+        class="mobile-menu"
+        id="mobileMenu"
+        aria-label="打开菜单">
+        ☰
+    </button>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<header class="hero" id="top">
+
+    <div class="hero-label">
+        影视视觉特效 / 后期合成
+    </div>
+
+
+    <h1 class="hero-title">
+
+        VISUAL
+
+        <br>
+
+        <span class="hero-title-outline">
+            EFFECTS
+        </span>
+
+    </h1>
+
+
+    <p class="hero-description">
+
+        专注影视视觉特效与后期合成。
+        提供 NUKE 合成、场景修复、抠像、
+        ROTO 以及 VFX 视觉特效等专业服务。
+
+    </p>
+
+
+    <a
+        href="#work"
+        class="view-work-btn">
+
+        <span>
+            查看作品
+        </span>
+
+        <span class="view-work-arrow">
+            ↓
+        </span>
+
+    </a>
 
 </header>
 
 
 
-<main>
-
-
-<!-- =========================
-     HERO
-========================= -->
+<!-- =========================================================
+     作品
+========================================================= -->
 
 <section
-    id="home"
-    class="hero">
-
-
-    <div class="hero-bg"></div>
-
-    <div class="hero-circle"></div>
-
-
-    <div class="hero-content">
-
-        <p class="eyebrow">
-            FILM · VFX · COMPOSITING
-        </p>
-
-
-        <h1>
-
-            VISUAL<br>
-
-            <span>
-                EFFECTS
-            </span>
-
-        </h1>
-
-
-        <p class="hero-description">
-
-            影视后期 · Nuke影视合成 ·
-            场景修复 · 抠像 · ROTO ·
-            VFX视觉效果
-
-        </p>
-
-
-        <a
-            href="#work"
-            class="hero-button">
-
-            查看作品
-            →
-
-        </a>
-
-    </div>
-
-
-    <div class="scroll-text">
-
-        SCROLL TO EXPLORE ↓
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     WORK
-========================= -->
-
-<section
-    id="work"
-    class="section">
-
+    class="section"
+    id="work">
 
     <div class="section-header">
 
         <div>
 
-            <p class="eyebrow">
-                SELECTED WORK
-            </p>
-
+            <div class="section-number">
+                01 / 精选作品
+            </div>
 
             <h2 class="section-title">
-                精选作品
+                作品
             </h2>
 
         </div>
@@ -1208,8 +1401,8 @@
 
         <p class="section-description">
 
-            精选影视后期、Nuke合成、
-            Cleanup、抠像以及视觉效果作品。
+            精选影视视觉特效、
+            后期合成及画面处理作品。
 
         </p>
 
@@ -1217,86 +1410,68 @@
 
 
 
-    <!-- FILTER -->
+    <!-- 分类筛选 -->
 
     <div class="filters">
 
-
         <button
-            class="filter active"
+            class="filter-btn active"
             data-filter="all">
-
             全部
-
         </button>
 
-
         <button
-            class="filter"
+            class="filter-btn"
             data-filter="nuke">
-
             NUKE
-
         </button>
 
-
         <button
-            class="filter"
+            class="filter-btn"
             data-filter="cleanup">
-
             场景修复
-
         </button>
 
-
         <button
-            class="filter"
+            class="filter-btn"
             data-filter="roto">
-
             抠像 / ROTO
-
         </button>
 
-
         <button
-            class="filter"
+            class="filter-btn"
             data-filter="vfx">
-
             VFX
-
         </button>
 
     </div>
 
 
 
-    <!-- PROJECTS -->
+    <!-- =====================================================
+         作品卡片
+    ===================================================== -->
 
     <div class="projects">
 
 
-
-        <!-- PROJECT 01 -->
+        <!-- 01 -->
 
         <article
             class="project"
             data-category="nuke"
-            data-title="影视剧场景合成"
             data-video="assets/videos/project01.mp4">
-
 
             <div class="project-image">
 
-
                 <img
                     src="images/project01.jpg"
-                    alt="影视剧场景合成">
+                    alt="影视剧场景合成"
+                    loading="lazy"
+                    onerror="handleImageError(this)">
 
-
-                <div class="project-overlay">
-
-                    VIEW PROJECT →
-
+                <div class="project-play">
+                    ▶
                 </div>
 
             </div>
@@ -1304,25 +1479,17 @@
 
             <div class="project-info">
 
-                <div class="project-category">
-
-                    NUKE · COMPOSITING
-
+                <div class="project-number">
+                    01
                 </div>
 
-
-                <h3 class="project-title">
-
+                <div class="project-title">
                     影视剧场景合成
+                </div>
 
-                </h3>
-
-
-                <p class="project-desc">
-
-                    原始素材 → 最终合成
-
-                </p>
+                <div class="project-category">
+                    NUKE
+                </div>
 
             </div>
 
@@ -1330,27 +1497,23 @@
 
 
 
-        <!-- PROJECT 02 -->
+        <!-- 02 -->
 
         <article
             class="project"
             data-category="cleanup"
-            data-title="场景穿帮修复"
             data-video="assets/videos/project02.mp4">
-
 
             <div class="project-image">
 
-
                 <img
                     src="images/project02.jpg"
-                    alt="场景穿帮修复">
+                    alt="场景穿帮修复"
+                    loading="lazy"
+                    onerror="handleImageError(this)">
 
-
-                <div class="project-overlay">
-
-                    VIEW PROJECT →
-
+                <div class="project-play">
+                    ▶
                 </div>
 
             </div>
@@ -1358,25 +1521,17 @@
 
             <div class="project-info">
 
-                <div class="project-category">
-
-                    CLEANUP · PAINT
-
+                <div class="project-number">
+                    02
                 </div>
 
-
-                <h3 class="project-title">
-
+                <div class="project-title">
                     场景穿帮修复
+                </div>
 
-                </h3>
-
-
-                <p class="project-desc">
-
-                    影视画面精细修复
-
-                </p>
+                <div class="project-category">
+                    CLEANUP
+                </div>
 
             </div>
 
@@ -1384,27 +1539,23 @@
 
 
 
-        <!-- PROJECT 03 -->
+        <!-- 03 -->
 
         <article
             class="project"
             data-category="roto"
-            data-title="影视级精细抠像"
             data-video="assets/videos/project03.mp4">
-
 
             <div class="project-image">
 
-
                 <img
                     src="assets/images/project03.jpg"
-                    alt="影视级精细抠像">
+                    alt="影视级精细抠像"
+                    loading="lazy"
+                    onerror="handleImageError(this)">
 
-
-                <div class="project-overlay">
-
-                    VIEW PROJECT →
-
+                <div class="project-play">
+                    ▶
                 </div>
 
             </div>
@@ -1412,25 +1563,17 @@
 
             <div class="project-info">
 
-                <div class="project-category">
-
-                    ROTO · KEYING
-
+                <div class="project-number">
+                    03
                 </div>
 
-
-                <h3 class="project-title">
-
+                <div class="project-title">
                     影视级精细抠像
+                </div>
 
-                </h3>
-
-
-                <p class="project-desc">
-
-                    绿幕 / 蓝幕 / 复杂背景
-
-                </p>
+                <div class="project-category">
+                    ROTO
+                </div>
 
             </div>
 
@@ -1438,27 +1581,23 @@
 
 
 
-        <!-- PROJECT 04 -->
+        <!-- 04 -->
 
         <article
             class="project"
             data-category="vfx"
-            data-title="广告视觉合成"
             data-video="assets/videos/project04.mp4">
-
 
             <div class="project-image">
 
-
                 <img
                     src="assets/images/project04.jpg"
-                    alt="广告视觉合成">
+                    alt="广告视觉合成"
+                    loading="lazy"
+                    onerror="handleImageError(this)">
 
-
-                <div class="project-overlay">
-
-                    VIEW PROJECT →
-
+                <div class="project-play">
+                    ▶
                 </div>
 
             </div>
@@ -1466,25 +1605,17 @@
 
             <div class="project-info">
 
-                <div class="project-category">
-
-                    VFX · ADVERTISING
-
+                <div class="project-number">
+                    04
                 </div>
 
-
-                <h3 class="project-title">
-
+                <div class="project-title">
                     广告视觉合成
+                </div>
 
-                </h3>
-
-
-                <p class="project-desc">
-
-                    广告后期与视觉效果
-
-                </p>
+                <div class="project-category">
+                    VFX
+                </div>
 
             </div>
 
@@ -1492,27 +1623,23 @@
 
 
 
-        <!-- PROJECT 05 -->
+        <!-- 05 -->
 
         <article
             class="project"
             data-category="nuke"
-            data-title="电影感画面合成"
             data-video="assets/videos/project05.mp4">
-
 
             <div class="project-image">
 
-
                 <img
                     src="assets/images/project05.jpg"
-                    alt="电影感画面合成">
+                    alt="电影感画面合成"
+                    loading="lazy"
+                    onerror="handleImageError(this)">
 
-
-                <div class="project-overlay">
-
-                    VIEW PROJECT →
-
+                <div class="project-play">
+                    ▶
                 </div>
 
             </div>
@@ -1520,25 +1647,17 @@
 
             <div class="project-info">
 
-                <div class="project-category">
-
-                    NUKE · COMPOSITING
-
+                <div class="project-number">
+                    05
                 </div>
 
-
-                <h3 class="project-title">
-
+                <div class="project-title">
                     电影感画面合成
+                </div>
 
-                </h3>
-
-
-                <p class="project-desc">
-
-                    光影 / 色彩 / 层次处理
-
-                </p>
+                <div class="project-category">
+                    NUKE
+                </div>
 
             </div>
 
@@ -1546,27 +1665,23 @@
 
 
 
-        <!-- PROJECT 06 -->
+        <!-- 06 -->
 
         <article
             class="project"
             data-category="cleanup"
-            data-title="擦威亚与穿帮修复"
             data-video="assets/videos/project06.mp4">
-
 
             <div class="project-image">
 
-
                 <img
                     src="assets/images/project06.jpg"
-                    alt="擦威亚与穿帮修复">
+                    alt="擦威亚与穿帮修复"
+                    loading="lazy"
+                    onerror="handleImageError(this)">
 
-
-                <div class="project-overlay">
-
-                    VIEW PROJECT →
-
+                <div class="project-play">
+                    ▶
                 </div>
 
             </div>
@@ -1574,25 +1689,91 @@
 
             <div class="project-info">
 
-                <div class="project-category">
-
-                    CLEANUP · PAINT
-
+                <div class="project-number">
+                    06
                 </div>
 
-
-                <h3 class="project-title">
-
+                <div class="project-title">
                     擦威亚与穿帮修复
+                </div>
 
-                </h3>
+                <div class="project-category">
+                    CLEANUP
+                </div>
+
+            </div>
+
+        </article>
 
 
-                <p class="project-desc">
 
-                    逐帧精细画面处理
+        <!-- 07 预留 -->
 
-                </p>
+        <article
+            class="project"
+            data-category="nuke"
+            data-reserved="true"
+            style="display:none;">
+
+            <div class="project-image">
+
+                <img
+                    src="assets/images/project07.jpg"
+                    alt="作品07"
+                    onerror="handleImageError(this)">
+
+            </div>
+
+            <div class="project-info">
+
+                <div class="project-number">
+                    07
+                </div>
+
+                <div class="project-title">
+                    新作品
+                </div>
+
+                <div class="project-category">
+                    NUKE
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 08 预留 -->
+
+        <article
+            class="project"
+            data-category="vfx"
+            data-reserved="true"
+            style="display:none;">
+
+            <div class="project-image">
+
+                <img
+                    src="assets/images/project08.jpg"
+                    alt="作品08"
+                    onerror="handleImageError(this)">
+
+            </div>
+
+            <div class="project-info">
+
+                <div class="project-number">
+                    08
+                </div>
+
+                <div class="project-title">
+                    新作品
+                </div>
+
+                <div class="project-category">
+                    VFX
+                </div>
 
             </div>
 
@@ -1605,35 +1786,41 @@
 
 
 
-<!-- =========================
-     SERVICES
-========================= -->
+<!-- =========================================================
+     服务
+========================================================= -->
 
 <section
-    id="services"
-    class="section services">
-
+    class="section"
+    id="services">
 
     <div class="section-header">
 
         <div>
 
-            <p class="eyebrow">
-                WHAT I DO
-            </p>
-
+            <div class="section-number">
+                02 / 服务
+            </div>
 
             <h2 class="section-title">
-                服务内容
+                服务
             </h2>
 
         </div>
+
+
+        <p class="section-description">
+
+            面向影视剧、广告及商业影像，
+            提供专业的视觉特效与后期制作服务。
+
+        </p>
 
     </div>
 
 
 
-    <div class="service-list">
+    <div class="services">
 
 
         <div class="service-item">
@@ -1642,22 +1829,15 @@
                 01
             </div>
 
+            <div class="service-name">
+                NUKE 合成
+            </div>
 
-            <h3 class="service-title">
-                Nuke影视合成
-            </h3>
-
-
-            <p class="service-description">
-
-                多层合成、场景整合、
-                光影匹配、色彩匹配、
-                CG与实拍素材融合。
-
-            </p>
+            <div class="service-description">
+                影视级后期合成
+            </div>
 
         </div>
-
 
 
         <div class="service-item">
@@ -1666,21 +1846,15 @@
                 02
             </div>
 
+            <div class="service-name">
+                场景修复
+            </div>
 
-            <h3 class="service-title">
-                影视抠像 / ROTO
-            </h3>
-
-
-            <p class="service-description">
-
-                绿幕、蓝幕、复杂背景、
-                动态人物及精细边缘处理。
-
-            </p>
+            <div class="service-description">
+                擦除 / 穿帮 / 清理
+            </div>
 
         </div>
-
 
 
         <div class="service-item">
@@ -1689,21 +1863,15 @@
                 03
             </div>
 
+            <div class="service-name">
+                抠像 / ROTO
+            </div>
 
-            <h3 class="service-title">
-                擦威亚 / Cleanup
-            </h3>
-
-
-            <p class="service-description">
-
-                威亚、穿帮、坏点、
-                杂物以及画面瑕疵修复。
-
-            </p>
+            <div class="service-description">
+                精细画面分离
+            </div>
 
         </div>
-
 
 
         <div class="service-item">
@@ -1712,18 +1880,13 @@
                 04
             </div>
 
+            <div class="service-name">
+                VFX 视觉特效
+            </div>
 
-            <h3 class="service-title">
-                广告 / VFX
-            </h3>
-
-
-            <p class="service-description">
-
-                广告后期、视觉效果、
-                画面增强及特效合成。
-
-            </p>
+            <div class="service-description">
+                视觉效果制作
+            </div>
 
         </div>
 
@@ -1734,145 +1897,183 @@
 
 
 
-<!-- =========================
-     ABOUT
-========================= -->
+<!-- =========================================================
+     关于
+========================================================= -->
 
 <section
-    id="about"
-    class="section about">
+    class="section"
+    id="about">
 
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-number">
+                03 / 关于
+            </div>
+
+            <h2 class="section-title">
+                关于
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="about-grid">
+
+
+        <div class="about-large">
+
+            专注于影视视觉特效与后期合成。
+
+        </div>
+
+
+        <div class="about-text">
+
+            <p>
+
+                FHJ 是一个专注影视视觉效果制作的个人工作室，
+                主要服务于影视剧、广告及商业影像项目。
+
+            </p>
+
+
+            <p>
+
+                工作内容涵盖 NUKE 合成、
+                场景修复、抠像、ROTO、
+                擦威亚以及各类视觉特效处理。
+
+            </p>
+
+
+            <p>
+
+                注重画面真实感、合成质量
+                以及最终成片的视觉统一。
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     联系
+========================================================= -->
+
+<section
+    class="section contact"
+    id="contact">
+
+    <div class="contact-content">
+
+
+        <div>
+
+            <div class="section-number">
+                04 / 联系
+            </div>
+
+            <div class="contact-title">
+                LET'S<br>
+                WORK.
+            </div>
+
+        </div>
+
+
+        <div class="contact-info">
+
+
+            <div>
+
+                <div class="contact-label">
+                    微信
+                </div>
+
+                <div class="contact-value">
+                    edj15131678
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <div class="contact-label">
+                    服务内容
+                </div>
+
+                <div class="contact-services">
+
+                    VFX<br>
+                    NUKE<br>
+                    ROTO<br>
+                    CLEANUP
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
 
     <div>
-
-        <p class="eyebrow">
-            ABOUT
-        </p>
-
-
-        <h2 class="about-title">
-
-            让画面更真实，<br>
-            让视觉效果服务于故事。
-
-        </h2>
-
+        © 2026 FHJ Visual Effects Studio
     </div>
 
-
-
-    <div class="about-text">
-
-        <p>
-
-            这里可以填写你的个人介绍、
-            从业经历、项目经历以及擅长领域。
-
-        </p>
-
-
-        <br>
-
-
-        <p>
-
-            专注影视后期制作、
-            Nuke合成、抠像、
-            Cleanup、VFX等视觉效果工作。
-
-        </p>
-
+    <div>
+        NUKE / VFX / ROTO / CLEANUP
     </div>
 
-</section>
+</footer>
 
 
 
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section
-    id="contact"
-    class="contact">
-
-
-    <p class="eyebrow">
-        CONTACT
-    </p>
-
-
-    <h2 class="contact-title">
-
-        有项目？<br>
-
-        <span>
-            Let's talk.
-        </span>
-
-    </h2>
-
-
-
-    <div class="contact-info">
-
-
-        <span>
-            微信：edj15131678
-        </span>
-
-
-        <a
-            href="mailto:hello@example.com">
-
-            hello@example.com
-            →
-
-        </a>
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-
-<!-- =========================
-     VIDEO MODAL
-========================= -->
+<!-- =========================================================
+     视频播放弹窗
+========================================================= -->
 
 <div
-    class="modal"
+    class="video-modal"
     id="videoModal">
 
+    <div class="video-container">
 
-    <button
-        class="modal-close"
-        id="closeModal">
-
-        ×
-
-    </button>
-
-
-    <div class="modal-content">
+        <button
+            class="video-close"
+            id="videoClose">
+            ×
+        </button>
 
 
         <video
             id="modalVideo"
             controls
             playsinline>
-
         </video>
-
-
-        <div
-            class="modal-title"
-            id="modalTitle">
-
-        </div>
 
     </div>
 
@@ -1880,328 +2081,155 @@
 
 
 
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <span>
-
-        © 2026 FHJ VISUAL EFFECTS
-
-    </span>
-
-
-    <span>
-
-        FILM · VFX · POST PRODUCTION
-
-    </span>
-
-</footer>
-
-
-
 <script>
 
+/* =========================================================
+   图片加载失败
+========================================================= */
 
-/* =========================
-   图片自动判断横竖版
-========================= */
+function handleImageError(img) {
 
-const imageElements =
-    document.querySelectorAll(
-        ".project-image img"
-    );
+    img.style.display="none";
 
+    const parent=img.parentElement;
 
-imageElements.forEach(img => {
-
-
-    /*
-     * 图片加载完成后判断比例
-     */
-
-    img.addEventListener(
-        "load",
-        function() {
-
-            const container =
-                this.closest(
-                    ".project-image"
-                );
-
-
-            if (
-                this.naturalWidth >
-                this.naturalHeight
-            ) {
-
-                container.classList.add(
-                    "landscape"
-                );
-
-                container.classList.remove(
-                    "portrait"
-                );
-
-            } else {
-
-                container.classList.add(
-                    "portrait"
-                );
-
-                container.classList.remove(
-                    "landscape"
-                );
-
-            }
-
-        }
-    );
-
-
-    /*
-     * 如果浏览器缓存中已经存在图片
-     */
-
-    if (img.complete) {
-
-        if (img.naturalWidth > 0) {
-
-            const container =
-                img.closest(
-                    ".project-image"
-                );
-
-
-            if (
-                img.naturalWidth >
-                img.naturalHeight
-            ) {
-
-                container.classList.add(
-                    "landscape"
-                );
-
-            } else {
-
-                container.classList.add(
-                    "portrait"
-                );
-
-            }
-
-        }
-
+    if(parent) {
+        parent.classList.add("image-error");
     }
 
+}
 
-    /*
-     * 图片不存在时
-     * 显示自定义占位
-     */
 
-    img.addEventListener(
-        "error",
-        function() {
+/* =========================================================
+   分类筛选
+========================================================= */
 
-            const container =
-                this.closest(
-                    ".project-image"
-                );
+const filterButtons=
+    document.querySelectorAll(".filter-btn");
 
+const projects=
+    document.querySelectorAll(".project");
 
-            this.style.display =
-                "none";
 
+filterButtons.forEach(button => {
 
-            const errorBox =
-                document.createElement(
-                    "div"
-                );
+    button.addEventListener("click",()=>{
 
+        const filter=
+            button.dataset.filter;
 
-            errorBox.className =
-                "image-error";
 
+        filterButtons.forEach(btn=>{
+            btn.classList.remove("active");
+        });
 
-            errorBox.innerHTML = `
-                <span>＋</span>
-                <span>IMAGE NOT FOUND</span>
-            `;
 
+        button.classList.add("active");
 
-            container.insertBefore(
-                errorBox,
-                container.firstChild
-            );
 
-        }
-    );
+        projects.forEach(project=>{
 
-});
+            if(project.dataset.reserved==="true"){
 
+                project.style.display="none";
 
-
-/* =========================
-   作品筛选
-========================= */
-
-const filters =
-    document.querySelectorAll(
-        ".filter"
-    );
-
-
-const projects =
-    document.querySelectorAll(
-        ".project"
-    );
-
-
-filters.forEach(button => {
-
-
-    button.addEventListener(
-        "click",
-        function() {
-
-
-            filters.forEach(item => {
-
-                item.classList.remove(
-                    "active"
-                );
-
-            });
-
-
-            this.classList.add(
-                "active"
-            );
-
-
-            const filter =
-                this.dataset.filter;
-
-
-            projects.forEach(project => {
-
-
-                if (
-                    filter === "all" ||
-                    project.dataset.category === filter
-                ) {
-
-                    project.style.display =
-                        "";
-
-                } else {
-
-                    project.style.display =
-                        "none";
-
-                }
-
-            });
-
-        }
-    );
-
-});
-
-
-
-/* =========================
-   VIDEO MODAL
-========================= */
-
-const modal =
-    document.getElementById(
-        "videoModal"
-    );
-
-
-const modalVideo =
-    document.getElementById(
-        "modalVideo"
-    );
-
-
-const modalTitle =
-    document.getElementById(
-        "modalTitle"
-    );
-
-
-const closeModal =
-    document.getElementById(
-        "closeModal"
-    );
-
-
-
-projects.forEach(project => {
-
-
-    project.addEventListener(
-        "click",
-        function() {
-
-
-            const video =
-                this.dataset.video;
-
-
-            const title =
-                this.dataset.title;
-
-
-            modalTitle.textContent =
-                title;
-
-
-            if (video) {
-
-                modalVideo.src =
-                    video;
-
-                modalVideo.load();
-
+                return;
             }
 
 
-            modal.classList.add(
-                "active"
-            );
+            const category=
+                project.dataset.category;
 
-        }
-    );
+
+            if(
+                filter==="all" ||
+                category===filter
+            ){
+
+                project.style.display="";
+
+            }else{
+
+                project.style.display="none";
+
+            }
+
+        });
+
+    });
 
 });
 
 
+/* =========================================================
+   视频播放
+========================================================= */
 
-/* =========================
-   CLOSE VIDEO
-========================= */
+const videoModal=
+    document.getElementById("videoModal");
 
-closeModal.addEventListener(
+const modalVideo=
+    document.getElementById("modalVideo");
+
+const videoClose=
+    document.getElementById("videoClose");
+
+
+projects.forEach(project=>{
+
+    project.addEventListener("click",()=>{
+
+        const video=
+            project.dataset.video;
+
+
+        if(!video){
+            return;
+        }
+
+
+        modalVideo.src=video;
+
+        videoModal.classList.add("active");
+
+
+        modalVideo.play().catch(()=>{});
+
+    });
+
+});
+
+
+/* 关闭视频 */
+
+function closeVideo(){
+
+    modalVideo.pause();
+
+    modalVideo.currentTime=0;
+
+    modalVideo.removeAttribute("src");
+
+    modalVideo.load();
+
+    videoModal.classList.remove("active");
+
+}
+
+
+videoClose.addEventListener(
     "click",
     closeVideo
 );
 
 
-modal.addEventListener(
+/* 点击背景关闭 */
+
+videoModal.addEventListener(
     "click",
-    function(event) {
+    event=>{
 
-
-        if (
-            event.target === modal
-        ) {
+        if(event.target===videoModal){
 
             closeVideo();
 
@@ -2211,43 +2239,75 @@ modal.addEventListener(
 );
 
 
+/* ESC关闭 */
 
-function closeVideo() {
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(event.key==="Escape"){
+
+            closeVideo();
+
+        }
+
+    }
+);
 
 
-    modal.classList.remove(
-        "active"
-    );
+/* =========================================================
+   明暗模式
+========================================================= */
+
+const themeToggle=
+    document.getElementById("themeToggle");
 
 
-    modalVideo.pause();
+const savedTheme=
+    localStorage.getItem("fhj-theme");
 
 
-    modalVideo.removeAttribute(
-        "src"
-    );
+if(savedTheme==="dark"){
 
+    document.body.classList.add("dark");
 
-    modalVideo.load();
+    themeToggle.textContent="☀";
+
+}else{
+
+    themeToggle.textContent="◐";
 
 }
 
 
+themeToggle.addEventListener(
+    "click",
+    ()=>{
 
-/* =========================
-   ESC
-========================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
+        document.body.classList.toggle("dark");
 
 
-        if (
-            event.key === "Escape"
-        ) {
+        const dark=
+            document.body.classList.contains("dark");
 
-            closeVideo();
+
+        if(dark){
+
+            localStorage.setItem(
+                "fhj-theme",
+                "dark"
+            );
+
+            themeToggle.textContent="☀";
+
+        }else{
+
+            localStorage.setItem(
+                "fhj-theme",
+                "light"
+            );
+
+            themeToggle.textContent="◐";
 
         }
 
@@ -2255,9 +2315,46 @@ document.addEventListener(
 );
 
 
+/* =========================================================
+   手机菜单
+========================================================= */
+
+const mobileMenu=
+    document.getElementById("mobileMenu");
+
+const navLinks=
+    document.getElementById("navLinks");
+
+
+mobileMenu.addEventListener(
+    "click",
+    ()=>{
+
+        navLinks.classList.toggle("open");
+
+    }
+);
+
+
+/* 点击菜单后自动关闭 */
+
+navLinks
+    .querySelectorAll("a")
+    .forEach(link=>{
+
+        link.addEventListener(
+            "click",
+            ()=>{
+
+                navLinks.classList.remove("open");
+
+            }
+        );
+
+    });
+
 </script>
 
-
 </body>
-
 </html>
+```
