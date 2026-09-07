@@ -1,14 +1,18 @@
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>FHJ | Visual Effects Studio</title>
 
 <meta name="description"
-content="FHJ Visual Effects Studio - NUKE影视合成、场景修复、抠像、ROTO、VFX视觉特效">
+      content="FHJ Visual Effects Studio - NUKE影视合成、场景修复、抠像、ROTO、VFX视觉特效">
+
 
 <style>
 
@@ -17,39 +21,64 @@ content="FHJ Visual Effects Studio - NUKE影视合成、场景修复、抠像、
 ========================================================= */
 
 :root {
+
     --bg:#ffffff;
+
     --bg-soft:#f6f6f3;
+
     --card-bg:#eeeeeb;
 
+
     --text:#111111;
+
     --text-secondary:#666666;
+
     --text-light:#999999;
 
+
     --border:#e5e5e5;
+
     --border-dark:#d7d7d7;
 
+
     --button-bg:#111111;
+
     --button-text:#ffffff;
 
+
     --nav-bg:rgba(255,255,255,.90);
+
 }
 
+
 body.dark {
+
     --bg:#111111;
+
     --bg-soft:#181818;
+
     --card-bg:#222222;
 
+
     --text:#f5f5f5;
+
     --text-secondary:#aaaaaa;
+
     --text-light:#777777;
 
+
     --border:#2d2d2d;
+
     --border-dark:#3b3b3b;
 
+
     --button-bg:#f5f5f5;
+
     --button-text:#111111;
 
+
     --nav-bg:rgba(17,17,17,.90);
+
 }
 
 
@@ -58,18 +87,29 @@ body.dark {
 ========================================================= */
 
 * {
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
 }
+
 
 html {
+
     scroll-behavior:smooth;
+
 }
 
+
 body {
+
     background:var(--bg);
+
     color:var(--text);
+
 
     font-family:
         -apple-system,
@@ -80,20 +120,30 @@ body {
         Arial,
         sans-serif;
 
+
     overflow-x:hidden;
+
 
     transition:
         background .3s ease,
         color .3s ease;
+
 }
+
 
 a {
+
     color:inherit;
+
     text-decoration:none;
+
 }
 
+
 button {
+
     font-family:inherit;
+
 }
 
 
@@ -102,33 +152,46 @@ button {
 ========================================================= */
 
 .nav {
+
     position:fixed;
 
     top:0;
+
     left:0;
 
     width:100%;
+
     height:78px;
 
+
     display:flex;
+
     align-items:center;
+
 
     padding:0 48px;
 
+
     background:var(--nav-bg);
 
+
     backdrop-filter:blur(18px);
+
     -webkit-backdrop-filter:blur(18px);
+
 
     border-bottom:1px solid var(--border);
 
+
     z-index:1000;
+
 }
 
 
 /* Logo */
 
 .logo {
+
     font-size:25px;
 
     font-weight:900;
@@ -138,6 +201,7 @@ button {
     line-height:1;
 
     flex-shrink:0;
+
 }
 
 
@@ -146,21 +210,22 @@ button {
 ========================================================= */
 
 .nav-links {
+
     display:flex;
 
     align-items:center;
 
     gap:42px;
 
-    /* 关键：整体推到最右侧 */
-
     margin-left:auto;
+
 }
 
 
 /* 中文菜单 */
 
 .nav-links a {
+
     position:relative;
 
     font-size:15px;
@@ -175,41 +240,52 @@ button {
 
     white-space:nowrap;
 
+
     transition:
         opacity .25s ease,
         transform .25s ease;
+
 }
 
 
 .nav-links a:hover {
+
     opacity:.55;
 
     transform:translateY(-1px);
+
 }
 
 
 /* 菜单底部线 */
 
 .nav-links a::after {
+
     content:"";
 
     position:absolute;
 
     left:0;
+
     bottom:0;
 
     width:0;
+
     height:1px;
 
     background:var(--text);
 
+
     transition:
         width .3s ease;
+
 }
 
 
 .nav-links a:hover::after {
+
     width:100%;
+
 }
 
 
@@ -218,41 +294,56 @@ button {
 ========================================================= */
 
 .theme-toggle {
+
     margin-left:32px;
 
+
     width:38px;
+
     height:38px;
+
 
     border:1px solid var(--border-dark);
 
+
     background:transparent;
 
+
     color:var(--text);
+
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
+
 
     cursor:pointer;
 
+
     font-size:16px;
 
+
     flex-shrink:0;
+
 
     transition:
         background .25s ease,
         color .25s ease,
         border .25s ease;
+
 }
 
 
 .theme-toggle:hover {
+
     background:var(--button-bg);
 
     color:var(--button-text);
 
     border-color:var(--button-bg);
+
 }
 
 
@@ -261,20 +352,25 @@ button {
 ========================================================= */
 
 .hero {
+
     min-height:100vh;
+
 
     padding:
         170px 48px 80px;
+
 
     display:flex;
 
     flex-direction:column;
 
     justify-content:center;
+
 }
 
 
 .hero-label {
+
     font-size:12px;
 
     font-weight:700;
@@ -284,10 +380,12 @@ button {
     color:var(--text-secondary);
 
     margin-bottom:30px;
+
 }
 
 
 .hero-title {
+
     font-size:clamp(72px,11vw,190px);
 
     line-height:.82;
@@ -297,20 +395,26 @@ button {
     letter-spacing:-.065em;
 
     text-transform:uppercase;
+
 }
 
 
 .hero-title-outline {
+
     color:transparent;
+
 
     -webkit-text-stroke:
         1.5px var(--text);
 
+
     margin-left:7vw;
+
 }
 
 
 .hero-description {
+
     max-width:600px;
 
     margin-top:52px;
@@ -320,6 +424,7 @@ button {
     line-height:2;
 
     color:var(--text-secondary);
+
 }
 
 
@@ -328,21 +433,29 @@ button {
 ========================================================= */
 
 .view-work-btn {
+
     margin-top:55px;
 
+
     width:fit-content;
+
 
     display:inline-flex;
 
     align-items:center;
 
+
     gap:28px;
+
 
     padding:14px 20px;
 
+
     border:1px solid var(--text);
 
+
     color:var(--text);
+
 
     font-size:11px;
 
@@ -350,34 +463,43 @@ button {
 
     letter-spacing:.12em;
 
+
     transition:
         background .3s ease,
         color .3s ease,
         transform .3s ease;
+
 }
 
 
 .view-work-btn:hover {
+
     background:var(--button-bg);
 
     color:var(--button-text);
 
     transform:translateY(-3px);
+
 }
 
 
 .view-work-arrow {
+
     font-size:15px;
 
     line-height:1;
 
+
     transition:
         transform .3s ease;
+
 }
 
 
 .view-work-btn:hover .view-work-arrow {
+
     transform:translateY(3px);
+
 }
 
 
@@ -386,25 +508,32 @@ button {
 ========================================================= */
 
 .section {
+
     padding:
         120px 48px;
+
 }
 
 
 .section-header {
+
     display:flex;
 
     justify-content:space-between;
 
     align-items:flex-end;
 
+
     margin-bottom:55px;
 
+
     gap:40px;
+
 }
 
 
 .section-number {
+
     font-size:11px;
 
     font-weight:700;
@@ -414,10 +543,12 @@ button {
     color:var(--text-light);
 
     margin-bottom:14px;
+
 }
 
 
 .section-title {
+
     font-size:clamp(48px,6vw,86px);
 
     line-height:.9;
@@ -425,10 +556,12 @@ button {
     font-weight:900;
 
     letter-spacing:-.05em;
+
 }
 
 
 .section-description {
+
     max-width:430px;
 
     font-size:14px;
@@ -436,6 +569,7 @@ button {
     line-height:1.9;
 
     color:var(--text-secondary);
+
 }
 
 
@@ -444,6 +578,7 @@ button {
 ========================================================= */
 
 .filters {
+
     display:flex;
 
     flex-wrap:wrap;
@@ -451,38 +586,47 @@ button {
     gap:10px;
 
     margin-bottom:35px;
+
 }
 
 
 .filter-btn {
+
     border:1px solid var(--border-dark);
 
     background:transparent;
 
     color:var(--text-secondary);
 
+
     padding:9px 15px;
+
 
     font-size:11px;
 
     font-weight:700;
 
+
     cursor:pointer;
+
 
     transition:
         background .25s ease,
         color .25s ease,
         border .25s ease;
+
 }
 
 
 .filter-btn:hover,
 .filter-btn.active {
+
     background:var(--button-bg);
 
     color:var(--button-text);
 
     border-color:var(--button-bg);
+
 }
 
 
@@ -492,14 +636,18 @@ button {
 ========================================================= */
 
 .projects {
+
     display:grid;
+
 
     grid-template-columns:
         repeat(6,minmax(0,1fr));
 
+
     column-gap:16px;
 
     row-gap:42px;
+
 }
 
 
@@ -508,82 +656,111 @@ button {
 ========================================================= */
 
 .project {
+
     cursor:pointer;
 
     min-width:0;
 
+
     transition:
         transform .35s ease;
+
 }
 
 
 .project:hover {
+
     transform:translateY(-5px);
+
 }
 
 
-/* 统一竖版4:5 */
+/* =========================================================
+   统一竖版4:5
+========================================================= */
 
 .project-image {
+
     position:relative;
+
 
     width:100%;
 
+
     aspect-ratio:4 / 5;
+
 
     overflow:hidden;
 
+
     background:var(--card-bg);
+
 
     display:flex;
 
     align-items:center;
 
     justify-content:center;
+
 }
 
 
 .project-image img {
+
     width:100%;
+
     height:100%;
 
+
     display:block;
+
 
     object-fit:cover;
 
     object-position:center;
 
+
     transition:
         transform .6s cubic-bezier(.2,.7,.2,1),
         opacity .3s ease;
+
 }
 
 
 .project:hover .project-image img {
+
     transform:scale(1.045);
+
 }
 
 
-/* 图片加载失败 */
+/* =========================================================
+   图片加载失败
+========================================================= */
 
 .project-image.image-error::after {
+
     content:"暂无预览";
+
 
     position:absolute;
 
     inset:0;
+
 
     display:flex;
 
     align-items:center;
 
     justify-content:center;
+
 
     font-size:11px;
 
     letter-spacing:.15em;
 
     color:var(--text-light);
+
 }
 
 
@@ -592,41 +769,58 @@ button {
 ========================================================= */
 
 .project-play {
+
     position:absolute;
 
+
     right:14px;
+
     bottom:14px;
 
+
     width:36px;
+
     height:36px;
+
 
     border-radius:50%;
 
+
     background:rgba(255,255,255,.92);
 
+
     color:#111;
+
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
+
 
     font-size:11px;
 
+
     opacity:0;
 
+
     transform:translateY(8px);
+
 
     transition:
         opacity .3s ease,
         transform .3s ease;
+
 }
 
 
 .project:hover .project-play {
+
     opacity:1;
 
     transform:translateY(0);
+
 }
 
 
@@ -635,11 +829,14 @@ button {
 ========================================================= */
 
 .project-info {
+
     padding-top:17px;
+
 }
 
 
 .project-number {
+
     font-size:10px;
 
     font-weight:700;
@@ -649,10 +846,214 @@ button {
     letter-spacing:.12em;
 
     margin-bottom:8px;
+
 }
 
 
+/* =========================================================
+   高级版：彩色圆点 + 分类文字
+========================================================= */
+
+.project-tag {
+
+    display:inline-flex;
+
+    align-items:center;
+
+
+    width:fit-content;
+
+
+    margin-bottom:9px;
+
+
+    font-size:10px;
+
+    font-weight:700;
+
+
+    letter-spacing:.08em;
+
+
+    color:var(--text-secondary);
+
+
+    line-height:1;
+
+
+    white-space:nowrap;
+
+}
+
+
+/* =========================================================
+   彩色圆点
+========================================================= */
+
+.project-tag::before {
+
+    content:"";
+
+
+    width:7px;
+
+    height:7px;
+
+
+    margin-right:8px;
+
+
+    border-radius:50%;
+
+
+    background:#999999;
+
+
+    flex-shrink:0;
+
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+/* 鼠标经过作品时圆点放大 */
+
+.project:hover .project-tag::before {
+
+    transform:scale(1.25);
+
+}
+
+
+/* =========================================================
+   电影
+========================================================= */
+
+.project-tag[data-type="电影"]::before {
+
+    background:#FF8FA3;
+
+
+    box-shadow:
+        0 0 0 3px rgba(255,143,163,.10);
+
+}
+
+
+/* =========================================================
+   电视剧
+========================================================= */
+
+.project-tag[data-type="电视剧"]::before {
+
+    background:#5DBBFF;
+
+
+    box-shadow:
+        0 0 0 3px rgba(93,187,255,.10);
+
+}
+
+
+/* =========================================================
+   广告
+========================================================= */
+
+.project-tag[data-type="广告"]::before {
+
+    background:#F5C842;
+
+
+    box-shadow:
+        0 0 0 3px rgba(245,200,66,.10);
+
+}
+
+
+/* =========================================================
+   MV
+========================================================= */
+
+.project-tag[data-type="MV"]::before {
+
+    background:#50D6A7;
+
+
+    box-shadow:
+        0 0 0 3px rgba(80,214,167,.10);
+
+}
+
+
+/* =========================================================
+   VFX
+========================================================= */
+
+.project-tag[data-type="VFX"]::before {
+
+    background:#A97AFF;
+
+
+    box-shadow:
+        0 0 0 3px rgba(169,122,255,.10);
+
+}
+
+
+/* =========================================================
+   短片
+========================================================= */
+
+.project-tag[data-type="短片"]::before {
+
+    background:#FF9C6B;
+
+
+    box-shadow:
+        0 0 0 3px rgba(255,156,107,.10);
+
+}
+
+
+/* =========================================================
+   游戏
+========================================================= */
+
+.project-tag[data-type="游戏"]::before {
+
+    background:#6E9EFF;
+
+
+    box-shadow:
+        0 0 0 3px rgba(110,158,255,.10);
+
+}
+
+
+/* =========================================================
+   其他
+========================================================= */
+
+.project-tag[data-type="其他"]::before {
+
+    background:#999999;
+
+
+    box-shadow:
+        0 0 0 3px rgba(153,153,153,.10);
+
+}
+
+
+/* =========================================================
+   作品标题
+========================================================= */
+
 .project-title {
+
     font-size:14px;
 
     font-weight:800;
@@ -660,15 +1061,18 @@ button {
     line-height:1.5;
 
     margin-bottom:5px;
+
 }
 
 
 .project-category {
+
     font-size:10px;
 
     color:var(--text-light);
 
     letter-spacing:.08em;
+
 }
 
 
@@ -677,60 +1081,78 @@ button {
 ========================================================= */
 
 .services {
+
     border-top:1px solid var(--border);
+
 }
 
 
 .service-item {
+
     display:grid;
+
 
     grid-template-columns:
         70px 1fr auto;
 
+
     align-items:center;
+
 
     gap:30px;
 
+
     padding:28px 0;
+
 
     border-bottom:1px solid var(--border);
 
+
     transition:
         padding .3s ease;
+
 }
 
 
 .service-item:hover {
+
     padding-left:10px;
 
     padding-right:10px;
+
 }
 
 
 .service-number {
+
     font-size:11px;
 
     color:var(--text-light);
 
     font-weight:700;
+
 }
 
 
 .service-name {
+
     font-size:clamp(24px,3vw,42px);
 
     font-weight:800;
 
     letter-spacing:-.04em;
+
 }
 
 
 .service-description {
+
     font-size:12px;
 
     color:var(--text-secondary);
 
     text-align:right;
+
 }
 
 
@@ -739,16 +1161,21 @@ button {
 ========================================================= */
 
 .about-grid {
+
     display:grid;
+
 
     grid-template-columns:
         1fr 1fr;
 
+
     gap:100px;
+
 }
 
 
 .about-large {
+
     font-size:clamp(30px,4vw,58px);
 
     line-height:1.1;
@@ -756,10 +1183,12 @@ button {
     font-weight:800;
 
     letter-spacing:-.04em;
+
 }
 
 
 .about-text {
+
     font-size:14px;
 
     line-height:2;
@@ -767,11 +1196,14 @@ button {
     color:var(--text-secondary);
 
     max-width:600px;
+
 }
 
 
 .about-text p + p {
+
     margin-top:25px;
+
 }
 
 
@@ -780,21 +1212,28 @@ button {
 ========================================================= */
 
 .contact {
+
     background:var(--bg-soft);
+
 }
 
 
 .contact-content {
+
     display:grid;
+
 
     grid-template-columns:
         1fr 1fr;
 
+
     gap:80px;
+
 }
 
 
 .contact-title {
+
     font-size:clamp(55px,8vw,120px);
 
     line-height:.85;
@@ -802,19 +1241,23 @@ button {
     font-weight:900;
 
     letter-spacing:-.07em;
+
 }
 
 
 .contact-info {
+
     display:flex;
 
     flex-direction:column;
 
     justify-content:flex-end;
+
 }
 
 
 .contact-label {
+
     font-size:10px;
 
     color:var(--text-light);
@@ -822,24 +1265,29 @@ button {
     letter-spacing:.12em;
 
     margin-bottom:8px;
+
 }
 
 
 .contact-value {
+
     font-size:18px;
 
     font-weight:700;
 
     margin-bottom:28px;
+
 }
 
 
 .contact-services {
+
     font-size:12px;
 
     color:var(--text-secondary);
 
     line-height:1.9;
+
 }
 
 
@@ -848,8 +1296,10 @@ button {
 ========================================================= */
 
 footer {
+
     padding:
         30px 48px;
+
 
     display:flex;
 
@@ -857,15 +1307,19 @@ footer {
 
     align-items:center;
 
+
     gap:20px;
 
+
     border-top:1px solid var(--border);
+
 
     font-size:10px;
 
     color:var(--text-light);
 
     letter-spacing:.08em;
+
 }
 
 
@@ -874,73 +1328,104 @@ footer {
 ========================================================= */
 
 .video-modal {
+
     position:fixed;
 
     inset:0;
 
+
     background:rgba(0,0,0,.88);
 
+
     display:none;
+
 
     align-items:center;
 
     justify-content:center;
 
+
     padding:40px;
 
+
     z-index:3000;
+
 }
 
 
 .video-modal.active {
+
     display:flex;
+
 }
 
 
 .video-container {
+
     position:relative;
+
 
     width:min(1200px,95vw);
 
+
     max-height:90vh;
+
 }
 
 
 .video-container video {
+
     display:block;
+
 
     width:100%;
 
+
     max-height:85vh;
 
+
     background:#000;
+
 }
 
 
 .video-close {
+
     position:absolute;
+
 
     right:-5px;
 
     top:-48px;
 
+
     width:36px;
+
     height:36px;
 
-    border:1px solid rgba(255,255,255,.5);
+
+    border:
+        1px solid rgba(255,255,255,.5);
+
 
     background:transparent;
 
+
     color:#fff;
+
 
     font-size:20px;
 
+
     cursor:pointer;
+
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
+
 }
 
 
@@ -949,22 +1434,32 @@ footer {
 ========================================================= */
 
 .mobile-menu {
+
     display:none;
+
 
     margin-left:18px;
 
+
     width:38px;
+
     height:38px;
+
 
     border:1px solid var(--border-dark);
 
+
     background:transparent;
+
 
     color:var(--text);
 
+
     cursor:pointer;
 
+
     font-size:18px;
+
 }
 
 
@@ -975,8 +1470,10 @@ footer {
 @media (max-width:1600px) {
 
     .projects {
+
         grid-template-columns:
             repeat(5,minmax(0,1fr));
+
     }
 
 }
@@ -989,26 +1486,41 @@ footer {
 @media (max-width:1300px) {
 
     .nav {
+
         padding:0 35px;
+
     }
+
 
     .nav-links {
+
         gap:36px;
+
     }
 
+
     .theme-toggle {
+
         margin-left:30px;
+
     }
+
 
     .hero,
     .section {
+
         padding-left:35px;
+
         padding-right:35px;
+
     }
 
+
     .projects {
+
         grid-template-columns:
             repeat(4,minmax(0,1fr));
+
     }
 
 }
@@ -1021,37 +1533,59 @@ footer {
 @media (max-width:1000px) {
 
     .nav {
+
         padding:0 25px;
+
     }
+
 
     .nav-links {
+
         gap:25px;
+
     }
+
 
     .nav-links a {
+
         font-size:14px;
+
     }
 
+
     .theme-toggle {
+
         margin-left:22px;
+
     }
+
 
     .hero,
     .section {
+
         padding-left:25px;
+
         padding-right:25px;
+
     }
 
+
     .projects {
+
         grid-template-columns:
             repeat(3,minmax(0,1fr));
 
+
         column-gap:14px;
+
     }
+
 
     .about-grid,
     .contact-content {
+
         gap:50px;
+
     }
 
 }
@@ -1064,14 +1598,20 @@ footer {
 @media (max-width:768px) {
 
     .nav {
+
         height:68px;
+
 
         padding:
             0 20px;
+
     }
 
+
     .logo {
+
         font-size:23px;
+
     }
 
 
@@ -1079,157 +1619,209 @@ footer {
 
         display:none;
 
+
         position:absolute;
+
 
         top:68px;
 
         left:0;
 
+
         width:100%;
+
 
         padding:20px;
 
+
         background:var(--nav-bg);
+
 
         backdrop-filter:blur(18px);
 
         -webkit-backdrop-filter:blur(18px);
 
+
         border-bottom:1px solid var(--border);
+
 
         flex-direction:column;
 
+
         align-items:flex-start;
+
 
         gap:18px;
 
+
         margin-left:0;
+
     }
 
 
     .nav-links.open {
+
         display:flex;
+
     }
 
 
     .nav-links a {
+
         font-size:16px;
 
         width:100%;
 
         padding:8px 0;
+
     }
 
 
     .theme-toggle {
+
         margin-left:auto;
+
     }
 
 
     .mobile-menu {
+
         display:flex;
 
         align-items:center;
 
         justify-content:center;
+
     }
 
 
     .hero {
+
         min-height:90vh;
+
 
         padding:
             140px 20px 70px;
+
     }
 
 
     .hero-title {
+
         font-size:
             clamp(58px,16vw,110px);
+
     }
 
 
     .hero-description {
+
         font-size:14px;
 
         margin-top:35px;
+
     }
 
 
     .section {
+
         padding:
             85px 20px;
+
     }
 
 
     .section-header {
+
         display:block;
 
         margin-bottom:40px;
+
     }
 
 
     .section-description {
+
         margin-top:25px;
+
     }
 
 
     .projects {
+
         grid-template-columns:
             repeat(2,minmax(0,1fr));
+
 
         column-gap:12px;
 
         row-gap:35px;
+
     }
 
 
     .project-title {
+
         font-size:13px;
+
     }
 
 
     .project-play {
+
         opacity:1;
 
         transform:none;
 
+
         width:32px;
 
         height:32px;
+
     }
 
 
     .about-grid,
     .contact-content {
+
         grid-template-columns:1fr;
 
         gap:45px;
+
     }
 
 
     .service-item {
+
         grid-template-columns:
             45px 1fr;
+
     }
 
 
     .service-description {
+
         grid-column:2;
+
 
         text-align:left;
 
+
         margin-top:-15px;
+
     }
 
 
     footer {
+
         padding:
             25px 20px;
+
 
         flex-direction:column;
 
         align-items:flex-start;
+
     }
 
 }
@@ -1242,32 +1834,43 @@ footer {
 @media (max-width:480px) {
 
     .projects {
+
         grid-template-columns:1fr;
+
     }
 
 
     .project-image {
+
         aspect-ratio:4 / 5;
+
     }
 
 
     .hero-title {
+
         font-size:58px;
+
     }
 
 
     .section-title {
+
         font-size:50px;
+
     }
 
 
     .view-work-btn {
+
         margin-top:40px;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -1280,46 +1883,72 @@ footer {
 
 <nav class="nav">
 
+
     <a href="#top" class="logo">
+
         FHJ.
+
     </a>
 
 
-    <div class="nav-links" id="navLinks">
+
+    <div
+        class="nav-links"
+        id="navLinks">
+
 
         <a href="#work">
+
             作品
+
         </a>
+
 
         <a href="#services">
+
             服务
+
         </a>
+
 
         <a href="#about">
+
             关于
+
         </a>
+
 
         <a href="#contact">
+
             联系
+
         </a>
 
+
     </div>
+
 
 
     <button
         class="theme-toggle"
         id="themeToggle"
         aria-label="切换主题">
+
         ◐
+
     </button>
+
 
 
     <button
         class="mobile-menu"
         id="mobileMenu"
         aria-label="打开菜单">
+
         ☰
+
     </button>
+
 
 </nav>
 
@@ -1329,11 +1958,17 @@ footer {
      HERO
 ========================================================= -->
 
-<header class="hero" id="top">
+<header
+    class="hero"
+    id="top">
+
 
     <div class="hero-label">
+
         影视视觉特效 / 后期合成
+
     </div>
+
 
 
     <h1 class="hero-title">
@@ -1343,10 +1978,13 @@ footer {
         <br>
 
         <span class="hero-title-outline">
+
             EFFECTS
+
         </span>
 
     </h1>
+
 
 
     <p class="hero-description">
@@ -1358,19 +1996,28 @@ footer {
     </p>
 
 
+
     <a
         href="#work"
         class="view-work-btn">
 
+
         <span>
+
             查看作品
+
         </span>
+
 
         <span class="view-work-arrow">
+
             ↓
+
         </span>
 
+
     </a>
+
 
 </header>
 
@@ -1384,19 +2031,29 @@ footer {
     class="section"
     id="work">
 
+
     <div class="section-header">
+
 
         <div>
 
+
             <div class="section-number">
+
                 01 / 精选作品
+
             </div>
 
+
             <h2 class="section-title">
+
                 作品
+
             </h2>
 
+
         </div>
+
 
 
         <p class="section-description">
@@ -1406,6 +2063,7 @@ footer {
 
         </p>
 
+
     </div>
 
 
@@ -1414,35 +2072,51 @@ footer {
 
     <div class="filters">
 
+
         <button
             class="filter-btn active"
             data-filter="all">
+
             全部
+
         </button>
+
 
         <button
             class="filter-btn"
             data-filter="nuke">
+
             NUKE
+
         </button>
+
 
         <button
             class="filter-btn"
             data-filter="cleanup">
+
             场景修复
+
         </button>
+
 
         <button
             class="filter-btn"
             data-filter="roto">
+
             抠像 / ROTO
+
         </button>
+
 
         <button
             class="filter-btn"
             data-filter="vfx">
+
             VFX
+
         </button>
+
 
     </div>
 
@@ -1455,14 +2129,19 @@ footer {
     <div class="projects">
 
 
-        <!-- 01 -->
+
+        <!-- =================================================
+             01 莫斯科行动
+        ================================================= -->
 
         <article
             class="project"
             data-category="nuke"
             data-video="assets/videos/project01.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project01.jpg"
@@ -1470,41 +2149,74 @@ footer {
                     loading="lazy"
                     onerror="handleImageError(this)">
 
+
                 <div class="project-play">
+
                     ▶
+
                 </div>
 
+
             </div>
+
 
 
             <div class="project-info">
 
+
                 <div class="project-number">
-                    影视剧场景合成
+
+                    01
+
                 </div>
+
+
+
+                <!-- 彩色分类 -->
+
+                <div
+                    class="project-tag"
+                    data-type="电影">
+
+                    电影
+
+                </div>
+
+
 
                 <div class="project-title">
+
                     莫斯科行动
+
                 </div>
+
 
                 <div class="project-category">
+
                     NUKE
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
 
-        <!-- 02 -->
+        <!-- =================================================
+             02
+        ================================================= -->
 
         <article
             class="project"
             data-category="cleanup"
             data-video="assets/videos/project02.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project02.jpg"
@@ -1512,41 +2224,70 @@ footer {
                     loading="lazy"
                     onerror="handleImageError(this)">
 
+
                 <div class="project-play">
+
                     ▶
+
                 </div>
 
+
             </div>
+
 
 
             <div class="project-info">
 
+
                 <div class="project-number">
+
                     02
+
                 </div>
+
+
+                <div
+                    class="project-tag"
+                    data-type="电视剧">
+
+                    电视剧
+
+                </div>
+
 
                 <div class="project-title">
+
                     场景穿帮修复
+
                 </div>
+
 
                 <div class="project-category">
+
                     CLEANUP
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
 
-        <!-- 03 -->
+        <!-- =================================================
+             03
+        ================================================= -->
 
         <article
             class="project"
             data-category="roto"
             data-video="assets/videos/project03.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project03.jpg"
@@ -1554,41 +2295,70 @@ footer {
                     loading="lazy"
                     onerror="handleImageError(this)">
 
+
                 <div class="project-play">
+
                     ▶
+
                 </div>
 
+
             </div>
+
 
 
             <div class="project-info">
 
+
                 <div class="project-number">
+
                     03
+
                 </div>
+
+
+                <div
+                    class="project-tag"
+                    data-type="电影">
+
+                    电影
+
+                </div>
+
 
                 <div class="project-title">
+
                     影视级精细抠像
+
                 </div>
+
 
                 <div class="project-category">
+
                     ROTO
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
 
-        <!-- 04 -->
+        <!-- =================================================
+             04
+        ================================================= -->
 
         <article
             class="project"
             data-category="vfx"
             data-video="assets/videos/project04.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project04.jpg"
@@ -1596,41 +2366,70 @@ footer {
                     loading="lazy"
                     onerror="handleImageError(this)">
 
+
                 <div class="project-play">
+
                     ▶
+
                 </div>
 
+
             </div>
+
 
 
             <div class="project-info">
 
+
                 <div class="project-number">
+
                     04
+
                 </div>
+
+
+                <div
+                    class="project-tag"
+                    data-type="广告">
+
+                    广告
+
+                </div>
+
 
                 <div class="project-title">
+
                     广告视觉合成
+
                 </div>
+
 
                 <div class="project-category">
+
                     VFX
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
 
-        <!-- 05 -->
+        <!-- =================================================
+             05
+        ================================================= -->
 
         <article
             class="project"
             data-category="nuke"
             data-video="assets/videos/project05.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project05.jpg"
@@ -1638,41 +2437,70 @@ footer {
                     loading="lazy"
                     onerror="handleImageError(this)">
 
+
                 <div class="project-play">
+
                     ▶
+
                 </div>
 
+
             </div>
+
 
 
             <div class="project-info">
 
+
                 <div class="project-number">
+
                     05
+
                 </div>
+
+
+                <div
+                    class="project-tag"
+                    data-type="电影">
+
+                    电影
+
+                </div>
+
 
                 <div class="project-title">
+
                     电影感画面合成
+
                 </div>
+
 
                 <div class="project-category">
+
                     NUKE
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
 
-        <!-- 06 -->
+        <!-- =================================================
+             06
+        ================================================= -->
 
         <article
             class="project"
             data-category="cleanup"
             data-video="assets/videos/project06.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project06.jpg"
@@ -1680,34 +2508,61 @@ footer {
                     loading="lazy"
                     onerror="handleImageError(this)">
 
+
                 <div class="project-play">
+
                     ▶
+
                 </div>
 
+
             </div>
+
 
 
             <div class="project-info">
 
+
                 <div class="project-number">
+
                     06
+
                 </div>
+
+
+                <div
+                    class="project-tag"
+                    data-type="电视剧">
+
+                    电视剧
+
+                </div>
+
 
                 <div class="project-title">
+
                     擦威亚与穿帮修复
+
                 </div>
+
 
                 <div class="project-category">
+
                     CLEANUP
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
 
-        <!-- 07 预留 -->
+        <!-- =================================================
+             07 预留
+        ================================================= -->
 
         <article
             class="project"
@@ -1715,36 +2570,63 @@ footer {
             data-reserved="true"
             style="display:none;">
 
+
             <div class="project-image">
 
+
                 <img
-                    src="assets/images/project07.jpg"
+                    src="images/project07.jpg"
                     alt="作品07"
                     onerror="handleImageError(this)">
 
+
             </div>
+
+
 
             <div class="project-info">
 
+
                 <div class="project-number">
+
                     07
+
                 </div>
+
+
+                <div
+                    class="project-tag"
+                    data-type="电影">
+
+                    电影
+
+                </div>
+
 
                 <div class="project-title">
+
                     新作品
+
                 </div>
+
 
                 <div class="project-category">
+
                     NUKE
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
 
-        <!-- 08 预留 -->
+        <!-- =================================================
+             08 预留
+        ================================================= -->
 
         <article
             class="project"
@@ -1752,35 +2634,61 @@ footer {
             data-reserved="true"
             style="display:none;">
 
+
             <div class="project-image">
 
+
                 <img
-                    src="assets/images/project08.jpg"
+                    src="images/project08.jpg"
                     alt="作品08"
                     onerror="handleImageError(this)">
 
+
             </div>
+
+
 
             <div class="project-info">
 
+
                 <div class="project-number">
+
                     08
+
                 </div>
+
+
+                <div
+                    class="project-tag"
+                    data-type="VFX">
+
+                    VFX
+
+                </div>
+
 
                 <div class="project-title">
+
                     新作品
+
                 </div>
+
 
                 <div class="project-category">
+
                     VFX
+
                 </div>
 
+
             </div>
+
 
         </article>
 
 
     </div>
+
 
 </section>
 
@@ -1794,19 +2702,29 @@ footer {
     class="section"
     id="services">
 
+
     <div class="section-header">
+
 
         <div>
 
+
             <div class="section-number">
+
                 02 / 服务
+
             </div>
 
+
             <h2 class="section-title">
+
                 服务
+
             </h2>
 
+
         </div>
+
 
 
         <p class="section-description">
@@ -1815,6 +2733,7 @@ footer {
             提供专业的视觉特效与后期制作服务。
 
         </p>
+
 
     </div>
 
@@ -1825,73 +2744,117 @@ footer {
 
         <div class="service-item">
 
+
             <div class="service-number">
+
                 01
+
             </div>
 
+
             <div class="service-name">
+
                 NUKE 合成
+
             </div>
 
+
             <div class="service-description">
+
                 影视级后期合成
+
             </div>
+
 
         </div>
 
 
+
         <div class="service-item">
 
+
             <div class="service-number">
+
                 02
+
             </div>
 
+
             <div class="service-name">
+
                 场景修复
+
             </div>
 
+
             <div class="service-description">
+
                 擦除 / 穿帮 / 清理
+
             </div>
+
 
         </div>
 
 
+
         <div class="service-item">
 
+
             <div class="service-number">
+
                 03
+
             </div>
+
 
             <div class="service-name">
+
                 抠像 / ROTO
+
             </div>
 
+
             <div class="service-description">
+
                 精细画面分离
+
             </div>
+
 
         </div>
 
 
+
         <div class="service-item">
 
+
             <div class="service-number">
+
                 04
+
             </div>
+
 
             <div class="service-name">
+
                 VFX 视觉特效
+
             </div>
 
+
             <div class="service-description">
+
                 视觉效果制作
+
             </div>
+
 
         </div>
 
 
     </div>
+
 
 </section>
 
@@ -1905,19 +2868,29 @@ footer {
     class="section"
     id="about">
 
+
     <div class="section-header">
+
 
         <div>
 
+
             <div class="section-number">
+
                 03 / 关于
+
             </div>
 
+
             <h2 class="section-title">
+
                 关于
+
             </h2>
 
+
         </div>
+
 
     </div>
 
@@ -1933,7 +2906,9 @@ footer {
         </div>
 
 
+
         <div class="about-text">
+
 
             <p>
 
@@ -1941,6 +2916,7 @@ footer {
                 主要服务于影视剧、广告及商业影像项目。
 
             </p>
+
 
 
             <p>
@@ -1952,6 +2928,7 @@ footer {
             </p>
 
 
+
             <p>
 
                 注重画面真实感、合成质量
@@ -1959,9 +2936,12 @@ footer {
 
             </p>
 
+
         </div>
 
+
     </div>
+
 
 </section>
 
@@ -1975,21 +2955,31 @@ footer {
     class="section contact"
     id="contact">
 
+
     <div class="contact-content">
 
 
         <div>
 
+
             <div class="section-number">
+
                 04 / 联系
+
             </div>
+
 
             <div class="contact-title">
+
                 LET'S<br>
+
                 WORK.
+
             </div>
 
+
         </div>
+
 
 
         <div class="contact-info">
@@ -1997,38 +2987,56 @@ footer {
 
             <div>
 
+
                 <div class="contact-label">
+
                     微信
+
                 </div>
 
+
                 <div class="contact-value">
+
                     edj15131678
+
                 </div>
+
 
             </div>
 
 
+
             <div>
 
+
                 <div class="contact-label">
+
                     服务内容
+
                 </div>
+
 
                 <div class="contact-services">
 
                     VFX<br>
+
                     NUKE<br>
+
                     ROTO<br>
+
                     CLEANUP
 
                 </div>
+
 
             </div>
 
 
         </div>
 
+
     </div>
+
 
 </section>
 
@@ -2040,13 +3048,20 @@ footer {
 
 <footer>
 
-    <div>
-        © 2026 FHJ Visual Effects Studio
-    </div>
 
     <div>
-        NUKE / VFX / ROTO / CLEANUP
+
+        © 2026 FHJ Visual Effects Studio
+
     </div>
+
+
+    <div>
+
+        NUKE / VFX / ROTO / CLEANUP
+
+    </div>
+
 
 </footer>
 
@@ -2060,22 +3075,30 @@ footer {
     class="video-modal"
     id="videoModal">
 
+
     <div class="video-container">
+
 
         <button
             class="video-close"
             id="videoClose">
+
             ×
+
         </button>
+
 
 
         <video
             id="modalVideo"
             controls
             playsinline>
+
         </video>
 
+
     </div>
+
 
 </div>
 
@@ -2091,10 +3114,14 @@ function handleImageError(img) {
 
     img.style.display="none";
 
+
     const parent=img.parentElement;
 
+
     if(parent) {
+
         parent.classList.add("image-error");
+
     }
 
 }
@@ -2104,23 +3131,28 @@ function handleImageError(img) {
    分类筛选
 ========================================================= */
 
-const filterButtons=
+const filterButtons =
     document.querySelectorAll(".filter-btn");
 
-const projects=
+
+const projects =
     document.querySelectorAll(".project");
 
 
 filterButtons.forEach(button => {
 
+
     button.addEventListener("click",()=>{
 
-        const filter=
+
+        const filter =
             button.dataset.filter;
 
 
         filterButtons.forEach(btn=>{
+
             btn.classList.remove("active");
+
         });
 
 
@@ -2129,34 +3161,43 @@ filterButtons.forEach(button => {
 
         projects.forEach(project=>{
 
-            if(project.dataset.reserved==="true"){
+
+            if(
+                project.dataset.reserved === "true"
+            ){
 
                 project.style.display="none";
 
                 return;
+
             }
 
 
-            const category=
+            const category =
                 project.dataset.category;
 
 
             if(
-                filter==="all" ||
-                category===filter
+                filter === "all" ||
+                category === filter
             ){
 
                 project.style.display="";
 
-            }else{
+            }
+
+            else {
 
                 project.style.display="none";
 
             }
 
+
         });
 
+
     });
+
 
 });
 
@@ -2165,54 +3206,71 @@ filterButtons.forEach(button => {
    视频播放
 ========================================================= */
 
-const videoModal=
+const videoModal =
     document.getElementById("videoModal");
 
-const modalVideo=
+
+const modalVideo =
     document.getElementById("modalVideo");
 
-const videoClose=
+
+const videoClose =
     document.getElementById("videoClose");
 
 
 projects.forEach(project=>{
 
+
     project.addEventListener("click",()=>{
 
-        const video=
+
+        const video =
             project.dataset.video;
 
 
         if(!video){
+
             return;
+
         }
 
 
         modalVideo.src=video;
+
 
         videoModal.classList.add("active");
 
 
         modalVideo.play().catch(()=>{});
 
+
     });
+
 
 });
 
 
-/* 关闭视频 */
+/* =========================================================
+   关闭视频
+========================================================= */
 
 function closeVideo(){
 
+
     modalVideo.pause();
+
 
     modalVideo.currentTime=0;
 
+
     modalVideo.removeAttribute("src");
+
 
     modalVideo.load();
 
+
     videoModal.classList.remove("active");
+
 
 }
 
@@ -2229,11 +3287,13 @@ videoModal.addEventListener(
     "click",
     event=>{
 
-        if(event.target===videoModal){
+
+        if(event.target === videoModal){
 
             closeVideo();
 
         }
+
 
     }
 );
@@ -2245,11 +3305,13 @@ document.addEventListener(
     "keydown",
     event=>{
 
-        if(event.key==="Escape"){
+
+        if(event.key === "Escape"){
 
             closeVideo();
 
         }
+
 
     }
 );
@@ -2259,23 +3321,30 @@ document.addEventListener(
    明暗模式
 ========================================================= */
 
-const themeToggle=
+const themeToggle =
     document.getElementById("themeToggle");
 
 
-const savedTheme=
+const savedTheme =
     localStorage.getItem("fhj-theme");
 
 
-if(savedTheme==="dark"){
+if(savedTheme === "dark"){
+
 
     document.body.classList.add("dark");
 
+
     themeToggle.textContent="☀";
 
-}else{
+
+}
+
+else {
+
 
     themeToggle.textContent="◐";
+
 
 }
 
@@ -2284,32 +3353,42 @@ themeToggle.addEventListener(
     "click",
     ()=>{
 
+
         document.body.classList.toggle("dark");
 
 
-        const dark=
+        const dark =
             document.body.classList.contains("dark");
 
 
         if(dark){
+
 
             localStorage.setItem(
                 "fhj-theme",
                 "dark"
             );
 
+
             themeToggle.textContent="☀";
 
-        }else{
+
+        }
+
+        else {
+
 
             localStorage.setItem(
                 "fhj-theme",
                 "light"
             );
 
+
             themeToggle.textContent="◐";
 
+
         }
+
 
     }
 );
@@ -2319,10 +3398,11 @@ themeToggle.addEventListener(
    手机菜单
 ========================================================= */
 
-const mobileMenu=
+const mobileMenu =
     document.getElementById("mobileMenu");
 
-const navLinks=
+
+const navLinks =
     document.getElementById("navLinks");
 
 
@@ -2330,7 +3410,9 @@ mobileMenu.addEventListener(
     "click",
     ()=>{
 
+
         navLinks.classList.toggle("open");
+
 
     }
 );
@@ -2342,19 +3424,24 @@ navLinks
     .querySelectorAll("a")
     .forEach(link=>{
 
+
         link.addEventListener(
             "click",
             ()=>{
 
+
                 navLinks.classList.remove("open");
+
 
             }
         );
+
 
     });
 
 </script>
 
+
 </body>
+
 </html>
-```
