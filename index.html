@@ -1,16 +1,25 @@
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>FHJ | Visual Effects Studio</title>
 
-    <meta name="description"
-          content="FHJ Visual Effects Studio - Nuke影视合成、VFX、抠像、Cleanup、场景修复与影视后期制作。">
+    <meta
+        name="description"
+        content="FHJ Visual Effects Studio - Nuke影视合成、VFX、抠像、Cleanup、场景修复与影视后期制作。">
 
     <style>
+
+        /* =========================
+           RESET
+        ========================= */
 
         * {
             margin: 0;
@@ -23,6 +32,7 @@
         }
 
         body {
+
             font-family:
                 Arial,
                 "Microsoft YaHei",
@@ -30,26 +40,34 @@
                 sans-serif;
 
             background: #f5f5f2;
+
             color: #111;
+
             overflow-x: hidden;
         }
 
         a {
+
             color: inherit;
+
             text-decoration: none;
         }
 
         button {
+
             font-family: inherit;
         }
 
 
+
         /* =========================
-           导航
+           NAVIGATION
         ========================= */
 
         .nav {
+
             position: fixed;
+
             top: 0;
             left: 0;
 
@@ -59,36 +77,55 @@
             padding: 0 6vw;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             z-index: 999;
 
-            background: rgba(245,245,242,.75);
+            background:
+                rgba(245,245,242,.75);
 
-            backdrop-filter: blur(20px);
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
 
             border-bottom:
                 1px solid rgba(0,0,0,.06);
         }
 
+
         .logo {
+
             font-size: 28px;
+
             font-weight: 800;
+
             letter-spacing: -2px;
         }
 
+
         .logo span {
+
             opacity: .35;
         }
 
+
         .nav-links {
+
             display: flex;
+
             gap: 35px;
         }
 
+
         .nav-links a {
+
             font-size: 11px;
+
             font-weight: 700;
 
             letter-spacing: 1.5px;
@@ -98,13 +135,16 @@
             transition: .25s;
         }
 
+
         .nav-links a:hover {
+
             opacity: 1;
         }
 
 
+
         /* =========================
-           首页
+           HERO
         ========================= */
 
         .hero {
@@ -118,10 +158,12 @@
             position: relative;
 
             display: flex;
+
             align-items: center;
 
             overflow: hidden;
         }
+
 
         .hero-bg {
 
@@ -147,14 +189,17 @@
                 );
         }
 
+
         .hero-circle {
 
             position: absolute;
 
             width: 60vw;
+
             height: 60vw;
 
             right: -25vw;
+
             top: 10vh;
 
             border:
@@ -166,9 +211,12 @@
             z-index: -1;
         }
 
+
         .hero-content {
+
             max-width: 1100px;
         }
+
 
         .eyebrow {
 
@@ -182,6 +230,7 @@
 
             margin-bottom: 22px;
         }
+
 
         .hero h1 {
 
@@ -199,10 +248,12 @@
             font-weight: 800;
         }
 
+
         .hero h1 span {
 
             font-weight: 400;
         }
+
 
         .hero-description {
 
@@ -216,6 +267,7 @@
 
             max-width: 500px;
         }
+
 
         .hero-button {
 
@@ -238,19 +290,21 @@
             transition: .3s;
         }
 
+
         .hero-button:hover {
 
             background: #111;
 
             color: white;
-
         }
+
 
         .scroll-text {
 
             position: absolute;
 
             bottom: 30px;
+
             left: 8vw;
 
             font-size: 9px;
@@ -261,8 +315,9 @@
         }
 
 
+
         /* =========================
-           通用 SECTION
+           SECTION
         ========================= */
 
         .section {
@@ -270,6 +325,7 @@
             padding:
                 130px 8vw;
         }
+
 
         .section-header {
 
@@ -284,6 +340,7 @@
             margin-bottom: 50px;
         }
 
+
         .section-title {
 
             font-size:
@@ -297,6 +354,7 @@
                 -.07em;
         }
 
+
         .section-description {
 
             max-width: 320px;
@@ -309,8 +367,9 @@
         }
 
 
+
         /* =========================
-           分类按钮
+           FILTER
         ========================= */
 
         .filters {
@@ -324,14 +383,17 @@
             margin-bottom: 35px;
         }
 
+
         .filter {
 
             border:
                 1px solid #d5d5d1;
 
-            background: transparent;
+            background:
+                transparent;
 
-            border-radius: 100px;
+            border-radius:
+                100px;
 
             padding:
                 10px 17px;
@@ -342,6 +404,7 @@
 
             transition: .25s;
         }
+
 
         .filter:hover,
         .filter.active {
@@ -354,8 +417,9 @@
         }
 
 
+
         /* =========================
-           作品卡片
+           PROJECT GRID
         ========================= */
 
         .projects {
@@ -365,48 +429,135 @@
             grid-template-columns:
                 repeat(2, 1fr);
 
-            gap: 35px 25px;
+            gap:
+                45px 25px;
         }
+
 
         .project {
 
             cursor: pointer;
+
+            min-width: 0;
         }
+
+
+
+        /* =========================
+           PROJECT IMAGE
+           
+           核心修改：
+           不再使用 cover
+        ========================= */
 
         .project-image {
 
             position: relative;
 
+            width: 100%;
+
             aspect-ratio: 16 / 10;
 
             overflow: hidden;
 
-            background: #ddd;
+            background:
+                #e9e9e5;
 
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
         }
+
 
         .project-image img {
 
             width: 100%;
+
             height: 100%;
 
-            object-fit: cover;
+            /*
+             * 核心：
+             * 完整显示图片
+             * 不裁切
+             * 不变形
+             */
+            object-fit: contain;
+
+            object-position: center;
 
             display: block;
 
             transition:
-                transform .6s,
-                filter .6s;
+                transform .6s ease,
+                filter .6s ease;
+
+            /*
+             * 防止图片不存在时出现默认破图
+             */
+            font-size: 0;
         }
+
+
+        /*
+         * 横版图片
+         */
+
+        .project-image.landscape img {
+
+            object-fit: cover;
+        }
+
+
+        /*
+         * 竖版图片
+         *
+         * 完整显示，不裁切
+         */
+
+        .project-image.portrait img {
+
+            object-fit: contain;
+
+            background:
+                #e9e9e5;
+        }
+
+
+        /*
+         * 竖版图片不进行放大
+         */
 
         .project:hover
-        .project-image img {
+        .project-image.portrait img {
 
-            transform: scale(1.035);
+            transform: none;
 
             filter:
-                brightness(.8);
+                brightness(.82);
         }
+
+
+        /*
+         * 横版图片正常轻微放大
+         */
+
+        .project:hover
+        .project-image.landscape img {
+
+            transform:
+                scale(1.035);
+
+            filter:
+                brightness(.82);
+        }
+
+
+
+        /* =========================
+           PROJECT OVERLAY
+        ========================= */
 
         .project-overlay {
 
@@ -432,7 +583,10 @@
             font-size: 11px;
 
             letter-spacing: 2px;
+
+            pointer-events: none;
         }
+
 
         .project:hover
         .project-overlay {
@@ -440,10 +594,17 @@
             opacity: 1;
         }
 
+
+
+        /* =========================
+           PROJECT INFO
+        ========================= */
+
         .project-info {
 
             padding-top: 17px;
         }
+
 
         .project-category {
 
@@ -454,6 +615,7 @@
             color: #888;
         }
 
+
         .project-title {
 
             margin-top: 7px;
@@ -462,6 +624,7 @@
 
             letter-spacing: -.04em;
         }
+
 
         .project-desc {
 
@@ -473,8 +636,49 @@
         }
 
 
+
         /* =========================
-           服务
+           IMAGE ERROR
+        ========================= */
+
+        .image-error {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            color: #999;
+
+            background:
+                #e9e9e5;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .image-error span:first-child {
+
+            font-size: 24px;
+
+            opacity: .4;
+        }
+
+
+
+        /* =========================
+           SERVICES
         ========================= */
 
         .services {
@@ -484,6 +688,7 @@
             color: #f5f5f2;
         }
 
+
         .services .eyebrow {
 
             color: #fff;
@@ -491,12 +696,14 @@
             opacity: .35;
         }
 
+
         .service-list {
 
             border-top:
                 1px solid
                 rgba(255,255,255,.15);
         }
+
 
         .service-item {
 
@@ -514,6 +721,7 @@
                 rgba(255,255,255,.15);
         }
 
+
         .service-number {
 
             font-size: 10px;
@@ -521,12 +729,14 @@
             opacity: .35;
         }
 
+
         .service-title {
 
             font-size: 22px;
 
             letter-spacing: -.04em;
         }
+
 
         .service-description {
 
@@ -536,6 +746,7 @@
 
             opacity: .45;
         }
+
 
 
         /* =========================
@@ -552,6 +763,7 @@
             gap: 10vw;
         }
 
+
         .about-title {
 
             font-size:
@@ -566,6 +778,7 @@
             letter-spacing: -.07em;
         }
 
+
         .about-text {
 
             padding-top: 45px;
@@ -578,8 +791,9 @@
         }
 
 
+
         /* =========================
-           联系
+           CONTACT
         ========================= */
 
         .contact {
@@ -589,6 +803,7 @@
 
             background: #e6e6e1;
         }
+
 
         .contact-title {
 
@@ -606,10 +821,12 @@
             margin-bottom: 90px;
         }
 
+
         .contact-title span {
 
             font-weight: 400;
         }
+
 
         .contact-info {
 
@@ -627,8 +844,9 @@
         }
 
 
+
         /* =========================
-           视频弹窗
+           MODAL
         ========================= */
 
         .modal {
@@ -651,18 +869,22 @@
             padding: 30px;
         }
 
+
         .modal.active {
 
             display: flex;
         }
 
+
         .modal-content {
 
-            width: min(
-                1100px,
-                95vw
-            );
+            width:
+                min(
+                    1100px,
+                    95vw
+                );
         }
+
 
         .modal video {
 
@@ -673,6 +895,7 @@
             background: black;
         }
 
+
         .modal-title {
 
             color: white;
@@ -681,6 +904,7 @@
 
             font-size: 20px;
         }
+
 
         .modal-close {
 
@@ -700,6 +924,7 @@
 
             cursor: pointer;
         }
+
 
 
         /* =========================
@@ -724,11 +949,13 @@
         }
 
 
+
         /* =========================
-           手机
+           MOBILE
         ========================= */
 
         @media(max-width: 768px) {
+
 
             .nav {
 
@@ -738,10 +965,12 @@
                     0 7vw;
             }
 
+
             .nav-links {
 
                 display: none;
             }
+
 
             .hero {
 
@@ -750,11 +979,13 @@
                     80px;
             }
 
+
             .hero h1 {
 
                 font-size:
                     22vw;
             }
+
 
             .section {
 
@@ -762,22 +993,34 @@
                     90px 7vw;
             }
 
+
             .section-header {
 
                 display: block;
             }
+
 
             .section-description {
 
                 margin-top: 20px;
             }
 
+
             .projects {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
 
                 gap: 40px;
             }
+
+
+            .project-image {
+
+                aspect-ratio:
+                    16 / 10;
+            }
+
 
             .service-item {
 
@@ -785,10 +1028,12 @@
                     40px 1fr;
             }
 
+
             .service-description {
 
                 grid-column: 2;
             }
+
 
             .about {
 
@@ -796,16 +1041,19 @@
                     1fr;
             }
 
+
             .about-text {
 
                 padding-top: 0;
             }
+
 
             .contact {
 
                 padding:
                     100px 7vw;
             }
+
 
             .contact-info {
 
@@ -814,15 +1062,18 @@
                 line-height: 2.5;
             }
 
+
             footer {
 
                 display: block;
 
                 line-height: 2;
             }
+
         }
 
     </style>
+
 </head>
 
 
@@ -830,7 +1081,7 @@
 
 
 <!-- =========================
-     导航
+     NAV
 ========================= -->
 
 <header class="nav">
@@ -838,6 +1089,7 @@
     <a href="#home" class="logo">
         FHJ<span>.</span>
     </a>
+
 
     <nav class="nav-links">
 
@@ -862,18 +1114,23 @@
 </header>
 
 
+
 <main>
 
 
 <!-- =========================
-     首页
+     HERO
 ========================= -->
 
-<section id="home" class="hero">
+<section
+    id="home"
+    class="hero">
+
 
     <div class="hero-bg"></div>
 
     <div class="hero-circle"></div>
+
 
     <div class="hero-content">
 
@@ -881,10 +1138,17 @@
             FILM · VFX · COMPOSITING
         </p>
 
+
         <h1>
+
             VISUAL<br>
-            <span>EFFECTS</span>
+
+            <span>
+                EFFECTS
+            </span>
+
         </h1>
+
 
         <p class="hero-description">
 
@@ -894,16 +1158,18 @@
 
         </p>
 
+
         <a
             href="#work"
             class="hero-button">
 
             查看作品
             →
-            
+
         </a>
 
     </div>
+
 
     <div class="scroll-text">
 
@@ -916,10 +1182,13 @@
 
 
 <!-- =========================
-     作品
+     WORK
 ========================= -->
 
-<section id="work" class="section">
+<section
+    id="work"
+    class="section">
+
 
     <div class="section-header">
 
@@ -929,11 +1198,13 @@
                 SELECTED WORK
             </p>
 
+
             <h2 class="section-title">
                 精选作品
             </h2>
 
         </div>
+
 
         <p class="section-description">
 
@@ -946,9 +1217,10 @@
 
 
 
-    <!-- 分类 -->
+    <!-- FILTER -->
 
     <div class="filters">
+
 
         <button
             class="filter active"
@@ -958,6 +1230,7 @@
 
         </button>
 
+
         <button
             class="filter"
             data-filter="nuke">
@@ -965,6 +1238,7 @@
             NUKE
 
         </button>
+
 
         <button
             class="filter"
@@ -974,6 +1248,7 @@
 
         </button>
 
+
         <button
             class="filter"
             data-filter="roto">
@@ -981,6 +1256,7 @@
             抠像 / ROTO
 
         </button>
+
 
         <button
             class="filter"
@@ -994,7 +1270,7 @@
 
 
 
-    <!-- 作品 -->
+    <!-- PROJECTS -->
 
     <div class="projects">
 
@@ -1008,30 +1284,44 @@
             data-title="影视剧场景合成"
             data-video="assets/videos/project01.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project01.jpg"
                     alt="影视剧场景合成">
 
+
                 <div class="project-overlay">
+
                     VIEW PROJECT →
+
                 </div>
 
             </div>
 
+
             <div class="project-info">
 
                 <div class="project-category">
+
                     NUKE · COMPOSITING
+
                 </div>
 
+
                 <h3 class="project-title">
+
                     影视剧场景合成
+
                 </h3>
 
+
                 <p class="project-desc">
+
                     原始素材 → 最终合成
+
                 </p>
 
             </div>
@@ -1048,30 +1338,44 @@
             data-title="场景穿帮修复"
             data-video="assets/videos/project02.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="images/project02.jpg"
                     alt="场景穿帮修复">
 
+
                 <div class="project-overlay">
+
                     VIEW PROJECT →
+
                 </div>
 
             </div>
 
+
             <div class="project-info">
 
                 <div class="project-category">
+
                     CLEANUP · PAINT
+
                 </div>
 
+
                 <h3 class="project-title">
+
                     场景穿帮修复
+
                 </h3>
 
+
                 <p class="project-desc">
+
                     影视画面精细修复
+
                 </p>
 
             </div>
@@ -1088,30 +1392,44 @@
             data-title="影视级精细抠像"
             data-video="assets/videos/project03.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="assets/images/project03.jpg"
                     alt="影视级精细抠像">
 
+
                 <div class="project-overlay">
+
                     VIEW PROJECT →
+
                 </div>
 
             </div>
 
+
             <div class="project-info">
 
                 <div class="project-category">
+
                     ROTO · KEYING
+
                 </div>
 
+
                 <h3 class="project-title">
+
                     影视级精细抠像
+
                 </h3>
 
+
                 <p class="project-desc">
+
                     绿幕 / 蓝幕 / 复杂背景
+
                 </p>
 
             </div>
@@ -1128,30 +1446,44 @@
             data-title="广告视觉合成"
             data-video="assets/videos/project04.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="assets/images/project04.jpg"
                     alt="广告视觉合成">
 
+
                 <div class="project-overlay">
+
                     VIEW PROJECT →
+
                 </div>
 
             </div>
 
+
             <div class="project-info">
 
                 <div class="project-category">
+
                     VFX · ADVERTISING
+
                 </div>
 
+
                 <h3 class="project-title">
+
                     广告视觉合成
+
                 </h3>
 
+
                 <p class="project-desc">
+
                     广告后期与视觉效果
+
                 </p>
 
             </div>
@@ -1168,30 +1500,44 @@
             data-title="电影感画面合成"
             data-video="assets/videos/project05.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="assets/images/project05.jpg"
                     alt="电影感画面合成">
 
+
                 <div class="project-overlay">
+
                     VIEW PROJECT →
+
                 </div>
 
             </div>
 
+
             <div class="project-info">
 
                 <div class="project-category">
+
                     NUKE · COMPOSITING
+
                 </div>
 
+
                 <h3 class="project-title">
+
                     电影感画面合成
+
                 </h3>
 
+
                 <p class="project-desc">
+
                     光影 / 色彩 / 层次处理
+
                 </p>
 
             </div>
@@ -1208,30 +1554,44 @@
             data-title="擦威亚与穿帮修复"
             data-video="assets/videos/project06.mp4">
 
+
             <div class="project-image">
+
 
                 <img
                     src="assets/images/project06.jpg"
                     alt="擦威亚与穿帮修复">
 
+
                 <div class="project-overlay">
+
                     VIEW PROJECT →
+
                 </div>
 
             </div>
 
+
             <div class="project-info">
 
                 <div class="project-category">
+
                     CLEANUP · PAINT
+
                 </div>
 
+
                 <h3 class="project-title">
+
                     擦威亚与穿帮修复
+
                 </h3>
 
+
                 <p class="project-desc">
+
                     逐帧精细画面处理
+
                 </p>
 
             </div>
@@ -1246,11 +1606,13 @@
 
 
 <!-- =========================
-     服务
+     SERVICES
 ========================= -->
 
-<section id="services"
-         class="section services">
+<section
+    id="services"
+    class="section services">
+
 
     <div class="section-header">
 
@@ -1259,6 +1621,7 @@
             <p class="eyebrow">
                 WHAT I DO
             </p>
+
 
             <h2 class="section-title">
                 服务内容
@@ -1279,14 +1642,18 @@
                 01
             </div>
 
+
             <h3 class="service-title">
                 Nuke影视合成
             </h3>
 
+
             <p class="service-description">
+
                 多层合成、场景整合、
                 光影匹配、色彩匹配、
                 CG与实拍素材融合。
+
             </p>
 
         </div>
@@ -1299,13 +1666,17 @@
                 02
             </div>
 
+
             <h3 class="service-title">
                 影视抠像 / ROTO
             </h3>
 
+
             <p class="service-description">
+
                 绿幕、蓝幕、复杂背景、
                 动态人物及精细边缘处理。
+
             </p>
 
         </div>
@@ -1318,13 +1689,17 @@
                 03
             </div>
 
+
             <h3 class="service-title">
                 擦威亚 / Cleanup
             </h3>
 
+
             <p class="service-description">
+
                 威亚、穿帮、坏点、
                 杂物以及画面瑕疵修复。
+
             </p>
 
         </div>
@@ -1337,13 +1712,17 @@
                 04
             </div>
 
+
             <h3 class="service-title">
                 广告 / VFX
             </h3>
 
+
             <p class="service-description">
+
                 广告后期、视觉效果、
                 画面增强及特效合成。
+
             </p>
 
         </div>
@@ -1356,17 +1735,20 @@
 
 
 <!-- =========================
-     关于
+     ABOUT
 ========================= -->
 
-<section id="about"
-         class="section about">
+<section
+    id="about"
+    class="section about">
+
 
     <div>
 
         <p class="eyebrow">
             ABOUT
         </p>
+
 
         <h2 class="about-title">
 
@@ -1378,6 +1760,7 @@
     </div>
 
 
+
     <div class="about-text">
 
         <p>
@@ -1387,7 +1770,9 @@
 
         </p>
 
+
         <br>
+
 
         <p>
 
@@ -1404,15 +1789,18 @@
 
 
 <!-- =========================
-     联系
+     CONTACT
 ========================= -->
 
-<section id="contact"
-         class="contact">
+<section
+    id="contact"
+    class="contact">
+
 
     <p class="eyebrow">
         CONTACT
     </p>
+
 
     <h2 class="contact-title">
 
@@ -1425,13 +1813,17 @@
     </h2>
 
 
+
     <div class="contact-info">
+
 
         <span>
             微信：edj15131678
         </span>
 
-        <a href="mailto:hello@example.com">
+
+        <a
+            href="mailto:hello@example.com">
 
             hello@example.com
             →
@@ -1448,12 +1840,13 @@
 
 
 <!-- =========================
-     视频弹窗
+     VIDEO MODAL
 ========================= -->
 
 <div
     class="modal"
     id="videoModal">
+
 
     <button
         class="modal-close"
@@ -1466,12 +1859,14 @@
 
     <div class="modal-content">
 
+
         <video
             id="modalVideo"
             controls
             playsinline>
 
         </video>
+
 
         <div
             class="modal-title"
@@ -1492,11 +1887,16 @@
 <footer>
 
     <span>
+
         © 2026 FHJ VISUAL EFFECTS
+
     </span>
 
+
     <span>
+
         FILM · VFX · POST PRODUCTION
+
     </span>
 
 </footer>
@@ -1507,29 +1907,180 @@
 
 
 /* =========================
+   图片自动判断横竖版
+========================= */
+
+const imageElements =
+    document.querySelectorAll(
+        ".project-image img"
+    );
+
+
+imageElements.forEach(img => {
+
+
+    /*
+     * 图片加载完成后判断比例
+     */
+
+    img.addEventListener(
+        "load",
+        function() {
+
+            const container =
+                this.closest(
+                    ".project-image"
+                );
+
+
+            if (
+                this.naturalWidth >
+                this.naturalHeight
+            ) {
+
+                container.classList.add(
+                    "landscape"
+                );
+
+                container.classList.remove(
+                    "portrait"
+                );
+
+            } else {
+
+                container.classList.add(
+                    "portrait"
+                );
+
+                container.classList.remove(
+                    "landscape"
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * 如果浏览器缓存中已经存在图片
+     */
+
+    if (img.complete) {
+
+        if (img.naturalWidth > 0) {
+
+            const container =
+                img.closest(
+                    ".project-image"
+                );
+
+
+            if (
+                img.naturalWidth >
+                img.naturalHeight
+            ) {
+
+                container.classList.add(
+                    "landscape"
+                );
+
+            } else {
+
+                container.classList.add(
+                    "portrait"
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /*
+     * 图片不存在时
+     * 显示自定义占位
+     */
+
+    img.addEventListener(
+        "error",
+        function() {
+
+            const container =
+                this.closest(
+                    ".project-image"
+                );
+
+
+            this.style.display =
+                "none";
+
+
+            const errorBox =
+                document.createElement(
+                    "div"
+                );
+
+
+            errorBox.className =
+                "image-error";
+
+
+            errorBox.innerHTML = `
+                <span>＋</span>
+                <span>IMAGE NOT FOUND</span>
+            `;
+
+
+            container.insertBefore(
+                errorBox,
+                container.firstChild
+            );
+
+        }
+    );
+
+});
+
+
+
+/* =========================
    作品筛选
 ========================= */
 
 const filters =
-    document.querySelectorAll(".filter");
+    document.querySelectorAll(
+        ".filter"
+    );
+
 
 const projects =
-    document.querySelectorAll(".project");
+    document.querySelectorAll(
+        ".project"
+    );
 
 
 filters.forEach(button => {
+
 
     button.addEventListener(
         "click",
         function() {
 
+
             filters.forEach(item => {
 
-                item.classList.remove("active");
+                item.classList.remove(
+                    "active"
+                );
 
             });
 
-            this.classList.add("active");
+
+            this.classList.add(
+                "active"
+            );
 
 
             const filter =
@@ -1538,16 +2089,19 @@ filters.forEach(button => {
 
             projects.forEach(project => {
 
+
                 if (
                     filter === "all" ||
                     project.dataset.category === filter
                 ) {
 
-                    project.style.display = "";
+                    project.style.display =
+                        "";
 
                 } else {
 
-                    project.style.display = "none";
+                    project.style.display =
+                        "none";
 
                 }
 
@@ -1561,30 +2115,45 @@ filters.forEach(button => {
 
 
 /* =========================
-   视频弹窗
+   VIDEO MODAL
 ========================= */
 
 const modal =
-    document.getElementById("videoModal");
+    document.getElementById(
+        "videoModal"
+    );
+
 
 const modalVideo =
-    document.getElementById("modalVideo");
+    document.getElementById(
+        "modalVideo"
+    );
+
 
 const modalTitle =
-    document.getElementById("modalTitle");
+    document.getElementById(
+        "modalTitle"
+    );
+
 
 const closeModal =
-    document.getElementById("closeModal");
+    document.getElementById(
+        "closeModal"
+    );
+
 
 
 projects.forEach(project => {
+
 
     project.addEventListener(
         "click",
         function() {
 
+
             const video =
                 this.dataset.video;
+
 
             const title =
                 this.dataset.title;
@@ -1604,7 +2173,9 @@ projects.forEach(project => {
             }
 
 
-            modal.classList.add("active");
+            modal.classList.add(
+                "active"
+            );
 
         }
     );
@@ -1614,7 +2185,7 @@ projects.forEach(project => {
 
 
 /* =========================
-   关闭视频
+   CLOSE VIDEO
 ========================= */
 
 closeModal.addEventListener(
@@ -1626,6 +2197,7 @@ closeModal.addEventListener(
 modal.addEventListener(
     "click",
     function(event) {
+
 
         if (
             event.target === modal
@@ -1639,13 +2211,22 @@ modal.addEventListener(
 );
 
 
+
 function closeVideo() {
 
-    modal.classList.remove("active");
+
+    modal.classList.remove(
+        "active"
+    );
+
 
     modalVideo.pause();
 
-    modalVideo.removeAttribute("src");
+
+    modalVideo.removeAttribute(
+        "src"
+    );
+
 
     modalVideo.load();
 
@@ -1653,9 +2234,14 @@ function closeVideo() {
 
 
 
+/* =========================
+   ESC
+========================= */
+
 document.addEventListener(
     "keydown",
     function(event) {
+
 
         if (
             event.key === "Escape"
@@ -1673,5 +2259,5 @@ document.addEventListener(
 
 
 </body>
+
 </html>
-```
